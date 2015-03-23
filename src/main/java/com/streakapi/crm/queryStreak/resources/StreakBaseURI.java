@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.com.koreinfo.crm.streakapi.queryStreak.resources;
+package com.streakapi.crm.queryStreak.resources;
 
 import java.net.URI;
 import java.net.URISyntaxException;

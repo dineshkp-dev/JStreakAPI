@@ -1,4 +1,4 @@
-package main.com.koreinfo.crm.streakapi.queryStreak;
+package com.streakapi.crm.queryStreak;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -6,17 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import main.com.koreinfo.crm.streakapi.exceptions.NoValidObjectsReturned;
-import main.com.koreinfo.crm.streakapi.queryStreak.resources.StreakBaseURI;
-import main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects.Box;
-import main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects.BoxField;
-import main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects.Field;
-import main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects.Field.TYPE;
-import main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects.Pipeline;
-import main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects.Stage;
-import main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects.Stages;
-import main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects.User;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -40,8 +29,16 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.streakapi.crm.exceptions.NoValidObjectsReturned;
+import com.streakapi.crm.queryStreak.resources.StreakBaseURI;
+import com.streakapi.crm.queryStreak.resources.streakObjects.Box;
+import com.streakapi.crm.queryStreak.resources.streakObjects.BoxField;
+import com.streakapi.crm.queryStreak.resources.streakObjects.Field;
+import com.streakapi.crm.queryStreak.resources.streakObjects.Field.TYPE;
+import com.streakapi.crm.queryStreak.resources.streakObjects.Pipeline;
+import com.streakapi.crm.queryStreak.resources.streakObjects.Stage;
+import com.streakapi.crm.queryStreak.resources.streakObjects.Stages;
+import com.streakapi.crm.queryStreak.resources.streakObjects.User;
 
 public class StreakAPIImpl {
 	private BasicCredentialsProvider credentialsProvider;

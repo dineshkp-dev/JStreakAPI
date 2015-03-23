@@ -1,4 +1,4 @@
-package main.com.koreinfo.crm.streakapi.exceptions;
+package com.streakapi.crm.exceptions;
 
 /**
  * @author dineshkp

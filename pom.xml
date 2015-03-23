@@ -36,13 +36,12 @@
     <version>2.5.1</version>
   </dependency>
 <!-- powermock with junit4 -->
-<!--
   <dependency>
     <groupId>org.powermock</groupId>
     <artifactId>powermock-module-junit4</artifactId>
     <version>1.6.1</version>
   </dependency>
--->
+
 <!-- powermock with mockito -->
   <dependency>
     <groupId>org.powermock</groupId>
@@ -50,8 +49,6 @@
     <version>1.6.1</version>
     <scope>test</scope>
   </dependency>
-
-
 
 <!--
     <dependency>

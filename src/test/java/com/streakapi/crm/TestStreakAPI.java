@@ -1,54 +1,25 @@
 /**
  * 
  */
-package test.com.koreinfo.crm.streakapi;
+package com.streakapi.crm;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedWriter;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Locale;
 
-import javax.net.ssl.SSLEngineResult.Status;
-import javax.swing.text.html.parser.Entity;
-
-import main.com.koreinfo.crm.streakapi.queryStreak.StreakAPI;
-import main.com.koreinfo.crm.streakapi.queryStreak.StreakAPIImpl;
-
-import org.apache.http.Header;
-import org.apache.http.HeaderElement;
-import org.apache.http.HeaderIterator;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
-import org.apache.http.ParseException;
-import org.apache.http.ProtocolVersion;
-import org.apache.http.StatusLine;
-import org.apache.http.client.entity.InputStreamFactory;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.impl.DefaultHttpResponseFactory;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicStatusLine;
-import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParams;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareEverythingForTest;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
-import static org.mockito.Mockito.*;
-
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 
-import static org.powermock.api.mockito.PowerMockito.verifyPrivate;
+import com.streakapi.crm.queryStreak.StreakAPIImpl;
 
 /**
  * @author dineshkp

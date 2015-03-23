@@ -1,5 +1,4 @@
-
-package main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects;
+package com.streakapi.crm.queryStreak.resources.streakObjects;
 
 import java.util.ArrayList;
 import java.util.Calendar;

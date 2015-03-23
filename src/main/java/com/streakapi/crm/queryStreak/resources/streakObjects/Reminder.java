@@ -1,4 +1,4 @@
-package main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects;
+package com.streakapi.crm.queryStreak.resources.streakObjects;
 
 public class Reminder {
 	private String creatorKey;

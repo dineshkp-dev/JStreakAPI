@@ -1,16 +1,15 @@
-package main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects;
+package com.streakapi.crm.queryStreak.resources.streakObjects;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import main.com.koreinfo.crm.streakapi.queryStreak.StreakAPIImpl;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.streakapi.crm.queryStreak.StreakAPIImpl;
 
 public class User extends StreakAPIImpl{
 
@@ -32,7 +31,6 @@ public class User extends StreakAPIImpl{
 		super(userKey);
 	}
 
-	@SuppressWarnings("unused")
 	protected User() {	}
 
 
@@ -182,7 +180,7 @@ public class User extends StreakAPIImpl{
 	public void setKey(String key) {
 		this.key = key;
 	}
-	
+
 	@JsonAnySetter
 	private void unknownItemHandler(String key, Object value) {
 		otherItemsMap.put(key, value);

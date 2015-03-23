@@ -1,9 +1,9 @@
 /**
  * 
  */
-package main.com.koreinfo.crm.streakapi.queryStreak;
+package com.streakapi.crm.queryStreak;
 
-import main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects.User;
+import com.streakapi.crm.queryStreak.resources.streakObjects.User;
 
 /**
  * @author Administrator

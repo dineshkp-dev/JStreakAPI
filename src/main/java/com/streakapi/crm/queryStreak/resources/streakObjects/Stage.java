@@ -1,12 +1,7 @@
-/**
- * 
- */
-package main.com.koreinfo.crm.streakapi.queryStreak.resources.streakObjects;
+package com.streakapi.crm.queryStreak.resources.streakObjects;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.annotation.Generated;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -20,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({
 "name",
 "key"
