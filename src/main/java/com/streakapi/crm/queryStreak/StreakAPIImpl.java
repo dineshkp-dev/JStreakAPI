@@ -143,7 +143,7 @@ public class StreakAPIImpl {
 	 * @param response
 	 * @return
 	 */
-/*	public boolean checkConnection(CloseableHttpResponse response) {
+	/*	public boolean checkConnection(CloseableHttpResponse response) {
 
 		Boolean connectionSuccess = true;
 		if (response == null) {
@@ -186,9 +186,14 @@ public class StreakAPIImpl {
 			user = mapper.readValue(response.getEntity().getContent(), User.class);
 		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
-		} finally {
-			response.close();
-			closeHttpClient();
+		}
+		finally {
+			try {
+				response.close();
+				closeHttpClient();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return user;
 	}
@@ -212,14 +217,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at User.class:getCurrentUser()");
 			}
 			user = mapper.readValue(response.getEntity().getContent(), User.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -250,14 +251,10 @@ public class StreakAPIImpl {
 			System.out.println(mapper.getClass());
 			JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Pipeline.class);
 			pipelines = mapper.readValue(response.getEntity().getContent(), type);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -287,14 +284,10 @@ public class StreakAPIImpl {
 			}
 			System.out.println(mapper.getClass());
 			pipeline = mapper.readValue(response.getEntity().getContent(), Pipeline.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -326,14 +319,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
 			}
 			pipeline = mapper.readValue(response.getEntity().getContent(), Pipeline.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -399,15 +388,10 @@ public class StreakAPIImpl {
 			}
 			mapDeleteResults = mapper.readValue(response.getEntity().getContent(), new TypeReference<HashMap<String, String>>(){});
 			success = Boolean.parseBoolean(mapDeleteResults.get("success"));
-
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -441,14 +425,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.editPipeline()");
 			}
 			pipeline = mapper.readValue(response.getEntity().getContent(), Pipeline.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -479,14 +459,10 @@ public class StreakAPIImpl {
 			System.out.println(mapper.getClass());
 			JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Box.class);
 			boxes = mapper.readValue(response.getEntity().getContent(), type);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -518,14 +494,10 @@ public class StreakAPIImpl {
 			System.out.println(mapper.getClass());
 			JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Box.class);
 			boxes = mapper.readValue(response.getEntity().getContent(), type);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -556,14 +528,10 @@ public class StreakAPIImpl {
 			}
 			box = mapper.readValue(response.getEntity().getContent(), Box.class);
 			//DEBUG		System.out.println(mapper.writeValueAsString(box));
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -596,14 +564,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
 			}
 			box = mapper.readValue(response.getEntity().getContent(), Box.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -671,15 +635,10 @@ public class StreakAPIImpl {
 			}
 			mapDeleteResults = mapper.readValue(response.getEntity().getContent(), new TypeReference<HashMap<String, String>>(){});
 			success = Boolean.parseBoolean(mapDeleteResults.get("success"));
-
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -714,14 +673,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.class:editBox()");
 			}
 			box = mapper.readValue(response.getEntity().getContent(), Box.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -746,14 +701,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.getStagesInPipeline()");
 			}
 			stages = mapper.readValue(response.getEntity().getContent(), Stages.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -778,14 +729,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.getStagesInPipeline()");
 			}
 			stage = mapper.readValue(response.getEntity().getContent(), Stage.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -818,14 +765,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
 			}
 			stage = mapper.readValue(response.getEntity().getContent(), Stage.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -875,15 +818,10 @@ public class StreakAPIImpl {
 			}
 			mapDeleteResults = mapper.readValue(response.getEntity().getContent(), new TypeReference<HashMap<String, String>>(){});
 			success = Boolean.parseBoolean(mapDeleteResults.get("success"));
-
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -919,14 +857,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.class:editBox()");
 			}
 			stage = mapper.readValue(response.getEntity().getContent(), Stage.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -958,14 +892,10 @@ public class StreakAPIImpl {
 			System.out.println(mapper.getClass());
 			JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Field.class);
 			fields = mapper.readValue(response.getEntity().getContent(), type);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -996,14 +926,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.getStagesInPipeline()");
 			}
 			field = mapper.readValue(response.getEntity().getContent(), Field.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -1030,14 +956,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
 			}
 			field = mapper.readValue(response.getEntity().getContent(), Field.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -1089,15 +1011,10 @@ public class StreakAPIImpl {
 			}
 			mapDeleteResults = mapper.readValue(response.getEntity().getContent(), new TypeReference<HashMap<String, String>>(){});
 			success = Boolean.parseBoolean(mapDeleteResults.get("success"));
-
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -1133,14 +1050,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.class:editBox()");
 			}
 			field = mapper.readValue(response.getEntity().getContent(), Field.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -1166,14 +1079,10 @@ public class StreakAPIImpl {
 			System.out.println(mapper.getClass());
 			JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, BoxField.class);
 			boxFields = mapper.readValue(response.getEntity().getContent(), type);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -1198,14 +1107,10 @@ public class StreakAPIImpl {
 			}
 			System.out.println(mapper.getClass());
 			boxField = mapper.readValue(response.getEntity().getContent(), BoxField.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
@@ -1234,14 +1139,10 @@ public class StreakAPIImpl {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.class:editBox()");
 			}
 			boxField = mapper.readValue(response.getEntity().getContent(), BoxField.class);
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		finally {
 			try {
 				response.close();
 				closeHttpClient();
