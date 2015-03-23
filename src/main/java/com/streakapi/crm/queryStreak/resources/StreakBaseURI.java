@@ -26,6 +26,11 @@ public class StreakBaseURI {
 		this.createBaseURL();
 	}
 	
+	/**
+	 * Generates the base Streak URI: https://www.streak.com/api/v1
+	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
+	 * 
+	 */
 	private void createBaseURL() {
 		try {
 			uri = new URIBuilder()
@@ -38,7 +43,8 @@ public class StreakBaseURI {
 	}
 
 	/**
-	 * @return the uri
+	 * Returns the base Streak URI
+	 * @see com.streakapi.crm.queryStreak.resources.StreakBaseURI#createBaseURL()
 	 */
 	public URI getUri() {
 		return uri;

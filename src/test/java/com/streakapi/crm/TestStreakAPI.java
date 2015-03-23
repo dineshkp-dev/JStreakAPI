@@ -24,6 +24,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.streakapi.crm.queryStreak.StreakAPIImpl;
+import com.streakapi.crm.utils.StreakConnectionUtil;
 
 /**
  * @author dineshkp
@@ -70,23 +71,23 @@ public class TestStreakAPI {
 			when(mockEntity.getContentLength()).thenReturn(100l);
 			when(mockResponse.getEntity()).thenReturn(mockEntity);
 			//The Tests
-			assertEquals(streakapi.checkConnection(mockResponse), true);
+			assertEquals(StreakConnectionUtil.checkHttpResponse(mockResponse), true);
 			
 			when(mockResponse.getStatusLine()).thenReturn(new BasicStatusLine(HttpVersion.HTTP_1_1, HttpStatus.SC_CREATED, "TEST PASS"));
-			assertEquals(streakapi.checkConnection(mockResponse), true);
+			assertEquals(StreakConnectionUtil.checkHttpResponse(mockResponse), true);
 			
 			//Check for connection exceptions
 			when(mockResponse.getStatusLine()).thenReturn(new BasicStatusLine(HttpVersion.HTTP_1_1, HttpStatus.SC_BAD_REQUEST, "TEST BAD REQUEST"));
-			assertEquals(streakapi.checkConnection(mockResponse), false);
+			assertEquals(StreakConnectionUtil.checkHttpResponse(mockResponse), false);
 			
 			when(mockResponse.getStatusLine()).thenReturn(new BasicStatusLine(HttpVersion.HTTP_1_1, HttpStatus.SC_GATEWAY_TIMEOUT, "TEST GATEWAY TIMEOUT"));
-			assertEquals(streakapi.checkConnection(mockResponse), false);
+			assertEquals(StreakConnectionUtil.checkHttpResponse(mockResponse), false);
 			
 			// Ensure that the methods of the Mock objects were invoked.
 			verify(mockResponse, atLeast(4)).getStatusLine();
 			verify(mockEntity, atLeast(4)).getContentLength();
 			mockResponse = null;
-			assertEquals(streakapi.checkConnection( mockResponse), false);
+			assertEquals(StreakConnectionUtil.checkHttpResponse( mockResponse), false);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

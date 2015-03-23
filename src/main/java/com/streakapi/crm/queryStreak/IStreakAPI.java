@@ -6,7 +6,7 @@ package com.streakapi.crm.queryStreak;
 import com.streakapi.crm.queryStreak.resources.streakObjects.User;
 
 /**
- * @author Administrator
+ * @author dineshkp
  *
  */
 public interface IStreakAPI {
