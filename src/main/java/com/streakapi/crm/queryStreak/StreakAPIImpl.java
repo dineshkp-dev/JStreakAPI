@@ -41,6 +41,7 @@ import com.streakapi.crm.queryStreak.resources.streakObjects.Pipeline;
 import com.streakapi.crm.queryStreak.resources.streakObjects.Stage;
 import com.streakapi.crm.queryStreak.resources.streakObjects.Stages;
 import com.streakapi.crm.queryStreak.resources.streakObjects.User;
+import com.streakapi.crm.utils.URIBuilderUtil;
 
 public class StreakAPIImpl {
 	private BasicCredentialsProvider credentialsProvider;
@@ -57,6 +58,7 @@ public class StreakAPIImpl {
 	private StreakBaseURI streakBaseURI = new StreakBaseURI();
 	private ContentType contentTypeJSON = ContentType.APPLICATION_JSON;
 	private ContentType contentTypeURLEncoded = ContentType.APPLICATION_FORM_URLENCODED;
+	private URIBuilderUtil streakURI = new URIBuilderUtil();
 
 	protected StreakAPIImpl() {	}
 
@@ -164,7 +166,7 @@ public class StreakAPIImpl {
 
 
 /**
- * @return
+ * @return User
  * @throws NoValidObjectsReturned
  * @throws IOException 
  */
@@ -173,7 +175,7 @@ public User getCurrentUser() throws NoValidObjectsReturned, IOException {
 	User user = null;
 	try {
 		startHttpClient();
-		httpGet = new HttpGet(new URIBuilder(streakBaseURI.getUri().toString()+"/users/me").build());
+		httpGet = new HttpGet(streakURI.getCurrentUserURI());
 		response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
 
 		if (!checkConnection(response)) {
