@@ -3,6 +3,7 @@
  */
 package com.streakapi.crm;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -16,8 +17,11 @@ import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.message.BasicStatusLine;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.streakapi.crm.queryStreak.StreakAPIImpl;
 
@@ -91,11 +95,11 @@ public class TestStreakAPI {
 	
 	public void testGetCurrentUser() {
 		System.out.println("TestStreakAPI.testGetCurrentUser()");
-		try {
+/*		try {
 			when()
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 	}
 }

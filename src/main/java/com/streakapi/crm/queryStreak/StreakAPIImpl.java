@@ -29,6 +29,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.streakapi.crm.exceptions.NoValidObjectsReturned;
 import com.streakapi.crm.queryStreak.resources.StreakBaseURI;
 import com.streakapi.crm.queryStreak.resources.streakObjects.Box;
