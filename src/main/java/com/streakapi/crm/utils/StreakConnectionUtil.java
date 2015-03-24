@@ -14,6 +14,12 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 public class StreakConnectionUtil {
 
 	/**
+	 * Checks for the following conditions:
+	 * <li>HttpResponse is not-null</li>
+	 * <li>HttpResponse status is less than 300</li>
+	 * <li>Checks if the entity value within the HttpResponse is non-null</li>
+	 * <br></br>
+	 * <p>If the conditions are met, boolean 'True' is returned, else 'False'.
 	 * @param response
 	 * @return
 	 */
