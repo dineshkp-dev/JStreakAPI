@@ -1,7 +1,6 @@
 package com.streakapi.crm.queryStreak;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,7 +59,6 @@ public class StreakAPIImpl {
 	
 	private StreakConnectionUtil streakConnUtil = null;
 
-	@SuppressWarnings("unused")
 	public StreakAPIImpl() {	}
 
 	public StreakAPIImpl(String userKey) {
@@ -71,8 +69,8 @@ public class StreakAPIImpl {
 		streakConnUtil = new StreakConnectionUtil();
 		this.credentialsProvider = streakConnUtil.createCredentialsProvider(userKey);
 		this.targetHost = streakConnUtil.createTargetHost();
-		this.authCache=streakConnUtil.createAuthCache();
-		this.context=streakConnUtil.getHttpClientContext();
+		this.authCache = streakConnUtil.createAuthCache();
+		this.context = streakConnUtil.getHttpClientContext();
 	}
 
 	private HttpClientContext getContext() {
@@ -87,7 +85,7 @@ public class StreakAPIImpl {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = null;
 		try {
-			httpClient = httpClient = streakConnUtil.startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getCurrentUserURI());
 			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
