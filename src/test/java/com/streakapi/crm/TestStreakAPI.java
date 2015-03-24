@@ -34,6 +34,7 @@ import com.streakapi.crm.utils.StreakConnectionUtil;
 @PrepareForTest(StreakAPIImpl.class)
 public class TestStreakAPI {
 	StreakAPIImpl streakapi = new StreakAPIImpl("");
+	StreakConnectionUtil streakConnUtilTest = new StreakConnectionUtil();
 
 	public TestStreakAPI() {
 		//		PowerMockito.mock(StreakAPI.class);
@@ -51,7 +52,7 @@ public class TestStreakAPI {
 		//		StreakAPI streakapi = new StreakAPI("");
 		try {
 			//			PowerMockito.when(streakapi, "createTargetHost").thenReturn(new HttpHost("www.streak.com",443, "http"));
-			assertEquals(streakapi.getTargetHost(), new HttpHost("www.streak.com",443, "https"));
+			assertEquals(streakConnUtilTest.createTargetHost(), new HttpHost("www.streak.com",443, "https"));
 			//Check for connection exceptions
 			//			verifyPrivate(streakapi).invoke("createTargetHost");
 		} catch (Exception e) {

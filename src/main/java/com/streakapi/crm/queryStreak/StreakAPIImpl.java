@@ -1,6 +1,7 @@
 package com.streakapi.crm.queryStreak;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,9 +10,6 @@ import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
-import org.apache.http.StatusLine;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -22,11 +20,8 @@ import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.auth.BasicScheme;
-import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
@@ -46,12 +41,13 @@ import com.streakapi.crm.utils.StreakURIBuilderUtil;
 import com.streakapi.crm.utils.StreakURIBuilderUtilImpl;
 
 public class StreakAPIImpl {
+	@SuppressWarnings("unused")
 	private BasicCredentialsProvider credentialsProvider;
 	private CloseableHttpClient httpClient;
 	private HttpHost targetHost;
+	@SuppressWarnings("unused")
 	private AuthCache authCache;
 	private HttpClientContext context;
-
 	private HttpGet httpGet;
 	private HttpPost httpPost;
 	private HttpPut httpPut;
@@ -61,124 +57,39 @@ public class StreakAPIImpl {
 	private ContentType contentTypeJSON = ContentType.APPLICATION_JSON;
 	private ContentType contentTypeURLEncoded = ContentType.APPLICATION_FORM_URLENCODED;
 	private StreakURIBuilderUtil streakURI = new StreakURIBuilderUtilImpl();
+	
+	private StreakConnectionUtil streakConnUtil = null;
 
-	protected StreakAPIImpl() {	}
+	@SuppressWarnings("unused")
+	public StreakAPIImpl() {	}
 
 	public StreakAPIImpl(String userKey) {
 		initStreakConnection(userKey);
 	}
 
 	private void initStreakConnection(String userKey) {
-		this.createCredentialsProvider(userKey);
-		//		this.createHttpClient();
-		this.createTargetHost();
-		this.createAuthCache();
+		streakConnUtil = new StreakConnectionUtil();
+		this.credentialsProvider = streakConnUtil.createCredentialsProvider(userKey);
+		this.targetHost = streakConnUtil.createTargetHost();
+		this.authCache=streakConnUtil.createAuthCache();
+		this.context=streakConnUtil.getHttpClientContext();
 	}
 
-	protected CloseableHttpClient getHttpClient() {
-		return this.httpClient;
-	}
-
-	protected HttpClientContext getContext() {
+	private HttpClientContext getContext() {
 		return this.context;
 	}
 
-	public HttpHost getTargetHost() {
+	private HttpHost getTargetHost() {
 		return this.targetHost;
 	}
 
-	protected void closeHttpClient() throws IOException {
-		System.out.println("Closing HttpClient Connection.");
-		this.httpClient.close();
-	}
-
-	protected void startHttpClient() {
-		this.createHttpClient();
-	}
-
-	/**
-	 * Set up the Credentials to be used for Authenticating the connection, using
-	 * only the 'UserKey' for authentication.
-	 * @param userKey
-	 */
-	private void createCredentialsProvider(String userKey) {
-		System.out.println("StreakAPI.createCredentialsProvider()");
-		this.credentialsProvider = new BasicCredentialsProvider();
-		credentialsProvider.setCredentials(
-				new AuthScope(AuthScope.ANY_HOST, StreakBaseURI.HTTPSPORTNUMBER),
-				new UsernamePasswordCredentials(userKey, ""));
-	}
-
-	/**
-	 * 
-	 */
-	private void createHttpClient() {
-		System.out.println("StreakAPI.createHttpClient()");
-		this.httpClient = HttpClients.custom().setDefaultCredentialsProvider(credentialsProvider).build();
-	}
-
-	/**
-	 * 
-	 */
-	private HttpHost createTargetHost() {
-		System.out.println("StreakAPI.createTargetHost()");
-		return this.targetHost = new HttpHost(StreakBaseURI.HOSTNAME, StreakBaseURI.HTTPSPORTNUMBER, StreakBaseURI.HTTPSCHEME);
-	}
-
-	/**
-	 * 
-	 */
-	private void createAuthCache() {
-		System.out.println("StreakAPI.createAuthCache()");
-		// Create Authentication Cache instance
-		authCache = new BasicAuthCache();
-		// Generate Basic Authentication scheme and add to the local Authentication cache
-		authCache.put(targetHost, new BasicScheme());
-		context = HttpClientContext.create();
-		context.setCredentialsProvider(credentialsProvider);
-		context.setAuthCache(authCache);
-	}
-
-	/**
-	 * @param response
-	 * @return
-	 */
-	/*	public boolean checkConnection(CloseableHttpResponse response) {
-
-		Boolean connectionSuccess = true;
-		if (response == null) {
-			System.out.println("Response cannot be NULL!.");
-			return connectionSuccess = false;
-		}
-		HttpEntity entity = response.getEntity();
-		StatusLine statusLine = response.getStatusLine();
-		// Ensure there are no Errors in Query 
-		if (statusLine.getStatusCode() >= 300) {
-			System.out.println("ERROR @ StreakAPI.class:checkConnection : " + statusLine.getStatusCode());
-			System.out.println(statusLine.getReasonPhrase());
-			connectionSuccess=false;
-		}
-		//Check if entity is empty
-		if (entity == null || (entity.getContentLength() == 0)) {
-			System.out.println("ERROR @ StreakAPI.class:checkConnection : Response Entity cannot be NULL or Empty");
-			connectionSuccess=false;
-		}
-		return connectionSuccess;
-	}*/
-
-
-	/**
-	 * @return User
-	 * @throws NoValidObjectsReturned
-	 * @throws IOException 
-	 */
 	public User getCurrentUser() throws NoValidObjectsReturned, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = null;
 		try {
-			startHttpClient();
+			httpClient = httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getCurrentUserURI());
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at User.class:getCurrentUser()");
@@ -190,7 +101,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -198,20 +109,15 @@ public class StreakAPIImpl {
 		return user;
 	}
 
-	/**
-	 * @param userKey
-	 * @return
-	 * @throws NoValidObjectsReturned
-	 */
 	public User getUser(String userKey) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.getUser()");
 		User user = null;
 		ObjectMapper mapper = new ObjectMapper();
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getUserURI(userKey));
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at User.class:getCurrentUser()");
@@ -223,7 +129,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -231,19 +137,15 @@ public class StreakAPIImpl {
 		return user;
 	}
 
-	/**
-	 * @return
-	 * @throws NoValidObjectsReturned
-	 */
 	public List<Pipeline> getAllPipelines() throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.getAllPipelines()");
 		ObjectMapper mapper = new ObjectMapper();
 		List<Pipeline> pipelines = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getAllPipelinesURI());
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.class:getAllPipelines()");
@@ -257,7 +159,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -275,9 +177,9 @@ public class StreakAPIImpl {
 		Pipeline pipeline = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getPipelineURI(pipelineKey));
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.class:getAllPipelines()");
@@ -290,7 +192,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -303,17 +205,17 @@ public class StreakAPIImpl {
 	 * @return
 	 * @throws NoValidObjectsReturned
 	 */
-	private Pipeline createPipeline(StringBuilder newPipelineData) throws NoValidObjectsReturned {
+	public Pipeline createPipeline(StringBuilder newPipelineData) throws NoValidObjectsReturned {
 		Pipeline pipeline = null;
 		ObjectMapper mapper = new ObjectMapper();
 		StringEntity entity = new StringEntity(newPipelineData.toString(), contentTypeURLEncoded);;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpPut = new HttpPut(streakURI.getCreatePipelineURI());
 			httpPut.setEntity(entity);
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpPut, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpPut, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
@@ -325,7 +227,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -378,10 +280,10 @@ public class StreakAPIImpl {
 		Map<String,String> mapDeleteResults = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpDelete = new HttpDelete(streakURI.getDeletePipelineURI(pipelineKey));
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpDelete, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpDelete, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.deletePipeline()");
@@ -394,7 +296,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -413,13 +315,13 @@ public class StreakAPIImpl {
 		HttpEntity entity = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpPost = new HttpPost(streakURI.getEditPipelineURI(pipelineKey));
 			String jSONString = mapper.writeValueAsString(pipeline);
 			entity = new StringEntity(jSONString, contentTypeJSON);
 			httpPost.setEntity(entity);
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpPost, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpPost, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.editPipeline()");
@@ -431,7 +333,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -449,9 +351,9 @@ public class StreakAPIImpl {
 		List<Box> boxes = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(new URIBuilder(streakBaseURI.getUri().toString()+"/boxes").build());
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.class:getAllPipelines()");
@@ -465,7 +367,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -484,9 +386,9 @@ public class StreakAPIImpl {
 		List<Box> boxes = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getBoxesInPipelineURI(pipelineKey));
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.class:getAllPipelines()");
@@ -500,7 +402,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -519,9 +421,9 @@ public class StreakAPIImpl {
 		Box box = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getBoxURI(boxKey));
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.class:getAllPipelines()");
@@ -534,14 +436,14 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 		return box;
 	}
-
+	
 	/**
 	 * @param pipelineKey
 	 * @param newBoxData
@@ -554,11 +456,11 @@ public class StreakAPIImpl {
 		Box box = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpPut = new HttpPut(streakURI.getCreateBoxURI(pipelineKey));
 			httpPut.setEntity(entity);
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpPut, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpPut, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
@@ -570,7 +472,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -625,10 +527,10 @@ public class StreakAPIImpl {
 		Map<String,String> mapDeleteResults = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpDelete = new HttpDelete(streakURI.getDeleteBoxURI(boxKey));
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpDelete, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpDelete, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
@@ -641,7 +543,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -661,13 +563,13 @@ public class StreakAPIImpl {
 		HttpEntity entity = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpPost = new HttpPost(streakURI.getEditBoxURI(boxKey));
 			String jSONString = mapper.writeValueAsString(box);
 			entity = new StringEntity(jSONString, contentTypeJSON);
 			httpPost.setEntity(entity);
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpPost, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpPost, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.class:editBox()");
@@ -679,7 +581,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -693,9 +595,9 @@ public class StreakAPIImpl {
 		Stages stages = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getAllStagesInPipelineURI(pipelineKey));
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.getStagesInPipeline()");
@@ -707,7 +609,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -721,9 +623,9 @@ public class StreakAPIImpl {
 		Stage stage = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(new URIBuilder(streakBaseURI.getUri().toString()+"/pipelines/"+pipelineKey+"/stages/"+stageKey).build());
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.getStagesInPipeline()");
@@ -735,7 +637,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -749,17 +651,17 @@ public class StreakAPIImpl {
 	 * @return
 	 * @throws NoValidObjectsReturned
 	 */
-	private Stage createStage(String pipelineKey, StringBuilder newStageData) throws NoValidObjectsReturned {
+	public Stage createStage(String pipelineKey, StringBuilder newStageData) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
 		StringEntity entity = new StringEntity(newStageData.toString(), contentTypeURLEncoded);;
 		Stage stage = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpPut = new HttpPut(streakURI.getCreateStageURI(pipelineKey));
 			httpPut.setEntity(entity);
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpPut, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpPut, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
@@ -771,7 +673,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -808,10 +710,10 @@ public class StreakAPIImpl {
 		Map<String,String> mapDeleteResults = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpDelete = new HttpDelete(streakURI.getDeleteStageURI(pipelineKey, stageKey));
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpDelete, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpDelete, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
@@ -824,7 +726,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -845,13 +747,13 @@ public class StreakAPIImpl {
 		HttpEntity entity = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpPost = new HttpPost(streakURI.getEditStageURI(pipelineKey, stageKey));
 			String jSONString = mapper.writeValueAsString(stage);
 			entity = new StringEntity(jSONString, contentTypeJSON);
 			httpPost.setEntity(entity);
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpPost, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpPost, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.class:editBox()");
@@ -863,7 +765,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -882,9 +784,9 @@ public class StreakAPIImpl {
 		List<Field> fields = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getAllFieldsInPipelineURI(pipelineKey));
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.class:getAllPipelines()");
@@ -898,7 +800,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -918,9 +820,9 @@ public class StreakAPIImpl {
 		Field field = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getFieldURI(pipelineKey, fieldKey));
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.getStagesInPipeline()");
@@ -932,7 +834,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -940,17 +842,17 @@ public class StreakAPIImpl {
 		return field;
 	}
 
-	private Field createField(String pipelineKey, StringBuilder newFieldData) throws NoValidObjectsReturned {
+	public Field createField(String pipelineKey, StringBuilder newFieldData) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
 		StringEntity entity = new StringEntity(newFieldData.toString(), contentTypeURLEncoded);
 		Field field = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpPut = new HttpPut(streakURI.getCreateFieldURI(pipelineKey));
 			httpPut.setEntity(entity);
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpPut, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpPut, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
@@ -962,7 +864,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -1001,10 +903,10 @@ public class StreakAPIImpl {
 		Map<String,String> mapDeleteResults = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpDelete = new HttpDelete(streakURI.getDeleteFieldURI(pipelineKey, fieldKey));
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpDelete, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpDelete, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
@@ -1017,7 +919,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -1038,13 +940,13 @@ public class StreakAPIImpl {
 		HttpEntity entity = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpPost = new HttpPost(streakURI.getEditFieldURI(pipelineKey, fieldKey));
 			String jSONString = mapper.writeValueAsString(field);
 			entity = new StringEntity(jSONString, contentTypeJSON);
 			httpPost.setEntity(entity);
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpPost, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpPost, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.class:editBox()");
@@ -1056,7 +958,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -1069,9 +971,9 @@ public class StreakAPIImpl {
 		List<BoxField> boxFields = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getAllFieldsInBoxURI(boxKey));
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.class:getAllPipelines()");
@@ -1085,7 +987,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -1098,9 +1000,9 @@ public class StreakAPIImpl {
 		BoxField boxField = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getBoxFieldURI(boxKey, fieldKey));
-			response = this.getHttpClient().execute(this.getTargetHost(), httpGet, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.class:getAllPipelines()");
@@ -1113,7 +1015,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -1127,13 +1029,13 @@ public class StreakAPIImpl {
 		HttpEntity entity = null;
 
 		try {
-			startHttpClient();
+			httpClient = streakConnUtil.startHttpClient();
 			httpPost = new HttpPost(streakURI.getEditFieldValueURI(boxKey, fieldKey));
 			String jSONString = mapper.writeValueAsString(boxField);
 			entity = new StringEntity(jSONString, contentTypeJSON);
 			httpPost.setEntity(entity);
 
-			response = this.getHttpClient().execute(this.getTargetHost(), httpPost, this.getContext());
+			response = httpClient.execute(this.getTargetHost(), httpPost, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.class:editBox()");
@@ -1145,7 +1047,7 @@ public class StreakAPIImpl {
 		finally {
 			try {
 				response.close();
-				closeHttpClient();
+				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

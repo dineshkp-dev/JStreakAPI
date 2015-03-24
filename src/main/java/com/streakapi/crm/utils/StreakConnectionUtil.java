@@ -3,15 +3,87 @@
  */
 package com.streakapi.crm.utils;
 
+import java.io.IOException;
+
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.StatusLine;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+
+import com.streakapi.crm.queryStreak.resources.StreakBaseURI;
 
 /**
  * @author dineshkp
  *
  */
 public class StreakConnectionUtil {
+	private BasicCredentialsProvider credentialsProvider = null;
+	private HttpHost targetHost = null;
+	private AuthCache authCache = null;
+	private HttpClientContext context = null;
+
+
+
+	public CloseableHttpClient startHttpClient() {
+		return HttpClients.custom().setDefaultCredentialsProvider(credentialsProvider).build();
+	}
+	
+	public void closeHttpClient(CloseableHttpClient httpClient) throws IOException {
+		System.out.println("Closing HttpClient Connection.");
+		httpClient.close();
+	}
+	
+	/**
+	 * Set up the Credentials to be used for Authenticating the connection, using
+	 * only the 'UserKey' for authentication.
+	 * @param userKey
+	 */
+	public BasicCredentialsProvider createCredentialsProvider(String userKey) {
+		System.out.println("StreakConnectionUtil.createCredentialsProvider()");
+		credentialsProvider = new BasicCredentialsProvider();
+		credentialsProvider.setCredentials(new AuthScope(AuthScope.ANY_HOST, StreakBaseURI.HTTPSPORTNUMBER),new UsernamePasswordCredentials(userKey, ""));
+		return credentialsProvider;
+	}
+	
+	/**
+	 * 
+	 */
+	public HttpHost createTargetHost() {
+		System.out.println("StreakConnectionUtil.createTargetHost()");
+		return this.targetHost = new HttpHost(StreakBaseURI.HOSTNAME, StreakBaseURI.HTTPSPORTNUMBER, StreakBaseURI.HTTPSCHEME);
+	}
+	
+	/**
+	 * @return 
+	 * 
+	 */
+	public AuthCache createAuthCache() {
+		System.out.println("StreakConnectionUtil.createAuthCache()");
+		// Create Authentication Cache instance
+		authCache = new BasicAuthCache();
+		// Generate Basic Authentication scheme and add to the local Authentication cache
+		authCache.put(targetHost, new BasicScheme());
+		context = HttpClientContext.create();
+		context.setCredentialsProvider(credentialsProvider);
+		context.setAuthCache(authCache);
+		return authCache;
+	}
+	
+	public HttpClientContext getHttpClientContext() {
+		if (context == null) {
+			this.createAuthCache();
+		}
+		return context;
+	}
 
 	/**
 	 * Checks for the following conditions:

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.streakapi.crm.queryStreak.StreakAPIImpl;
 
-public class User extends StreakAPIImpl{
+public class User{
 
 	private String email;
 	private String lowercaseEmail;
@@ -26,13 +26,6 @@ public class User extends StreakAPIImpl{
 	private String displayName;
 	private String key;
 	Map<String, Object> otherItemsMap = new HashMap<String, Object>();
-
-	public User(String userKey) {
-		super(userKey);
-	}
-
-	protected User() {	}
-
 
 	/**
 	 * @return the email
