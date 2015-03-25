@@ -72,6 +72,10 @@ public class StreakAPIImpl {
 		this.authCache = streakConnUtil.createAuthCache();
 		this.context = streakConnUtil.getHttpClientContext();
 	}
+	
+	public StreakConnectionUtil getStreakConnectionUtil() {
+		return this.streakConnUtil;
+	}
 
 	private HttpClientContext getContext() {
 		return this.context;
