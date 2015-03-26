@@ -33,7 +33,15 @@ public class StreakConnectionUtil {
 
 
 
+	/**
+	 * Creates a HttpClient object.
+	 * <li>MUST be called after initializing CredentialsProvider with User-Key.</li>
+	 * @return
+	 */
 	public CloseableHttpClient startHttpClient() {
+		if (credentialsProvider == null) {
+			throw new RuntimeException("CredentialsProvider has not been initialized with User-Key.");
+		}
 		return HttpClients.custom().setDefaultCredentialsProvider(credentialsProvider).build();
 	}
 	
