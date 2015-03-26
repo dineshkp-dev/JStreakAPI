@@ -21,6 +21,7 @@ import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpResponseFactory;
 import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
@@ -127,10 +128,10 @@ public class TestStreakAPI {
 			System.out.println("TestStreakAPI.testGetCurrentUser()");
 /*			streakConnUtilTest = streakapi.getStreakConnectionUtil();
 			HttpClient mockHttpClient = streakConnUtilTest.startHttpClient(); */
-			MockHttpClient  mockHttpClient = null;
+			HttpClient  mockHttpClient = PowerMockito.mock(HttpClient.class);
 			HttpGet httpGet = new HttpGet(streakURI.getCurrentUserURI());
 			HttpHost targetHost = streakConnUtilTest.createTargetHost();
-			HttpResponse mockHttpResponse = null;
+			HttpResponse mockHttpResponse = PowerMockito.mock(CloseableHttpResponse.class);
 			mockHttpResponse.setEntity(new StringEntity("{jSON String}", ContentType.APPLICATION_JSON));
 			
 			

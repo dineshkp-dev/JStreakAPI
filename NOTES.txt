@@ -1,0 +1,13 @@
+1. Change the package structure to com.streak.crm
+	- api
+		- contains all the interfaces that are accessible from outside.
+	- datatype
+		- all the Streak Objects (boxes, pipelines etc)
+	- impl
+		- implementation classes for the API
+	- util
+		- all the utils
+	- tool
+		- Main class to instantiate and run the API client as a JAR.
+
+		
