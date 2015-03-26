@@ -10,15 +10,25 @@ import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 
+import javax.swing.text.html.parser.Entity;
+
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.HttpEntityWrapper;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicStatusLine;
 import org.junit.Test;
@@ -27,6 +37,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.fasterxml.jackson.core.io.CharTypes;
 import com.streakapi.crm.queryStreak.StreakAPIImpl;
 import com.streakapi.crm.utils.StreakConnectionUtil;
 import com.streakapi.crm.utils.StreakURIBuilderUtil;
@@ -114,12 +125,18 @@ public class TestStreakAPI {
 	public void testGetCurrentUser() {
 		try {
 			System.out.println("TestStreakAPI.testGetCurrentUser()");
-			HttpClient httpClient = streakConnUtilTest.startHttpClient();
+/*			streakConnUtilTest = streakapi.getStreakConnectionUtil();
+			HttpClient mockHttpClient = streakConnUtilTest.startHttpClient(); */
+			MockHttpClient  mockHttpClient = null;
 			HttpGet httpGet = new HttpGet(streakURI.getCurrentUserURI());
 			HttpHost targetHost = streakConnUtilTest.createTargetHost();
-
-			when(httpClient.execute(targetHost, httpGet, streakConnUtilTest.getHttpClientContext()));//.then
-		} catch (IOException | URISyntaxException e) {
+			HttpResponse mockHttpResponse = null;
+			mockHttpResponse.setEntity(new StringEntity("{jSON String}", ContentType.APPLICATION_JSON));
+			
+			
+			when(mockHttpClient.execute(targetHost, httpGet, streakConnUtilTest.getHttpClientContext()));//.then
+			
+			} catch (IOException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
