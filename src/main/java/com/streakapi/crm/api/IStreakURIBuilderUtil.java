@@ -14,8 +14,7 @@ import java.net.URISyntaxException;
 public interface IStreakURIBuilderUtil {
 	
 	/**
-	 * Returns the URI: <i>https://www.streak.com/api/v1/users/me</i>
-	 * @return
+	 * @return URI: <i>https://www.streak.com/api/v1/users/me</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api/">https://www.streak.com/api/</a>
 	 */

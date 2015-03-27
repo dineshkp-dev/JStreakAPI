@@ -25,6 +25,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.streakapi.crm.api.IStreakAPI;
 import com.streakapi.crm.api.IStreakURIBuilderUtil;
 import com.streakapi.crm.datatype.Box;
 import com.streakapi.crm.datatype.BoxField;
@@ -39,7 +40,7 @@ import com.streakapi.crm.utils.StreakBaseURI;
 import com.streakapi.crm.utils.StreakConnectionUtil;
 import com.streakapi.crm.utils.StreakURIBuilderUtilImpl;
 
-public class StreakAPIImpl {
+public class StreakAPIImpl implements IStreakAPI{
 	@SuppressWarnings("unused")
 	private BasicCredentialsProvider credentialsProvider;
 	private CloseableHttpClient httpClient;
@@ -84,8 +85,15 @@ public class StreakAPIImpl {
 	private HttpHost getTargetHost() {
 		return this.targetHost;
 	}
+	
 
-	public User getCurrentUser() throws NoValidObjectsReturned, IOException {
+	/**
+	 * {@inheritDoc}
+	 * @return
+	 * @throws NoValidObjectsReturned
+	 * @throws IOException
+	 */
+	public User getCurrentUser() throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = null;
 		try {
@@ -207,7 +215,7 @@ public class StreakAPIImpl {
 	 * @return
 	 * @throws NoValidObjectsReturned
 	 */
-	public Pipeline createPipeline(StringBuilder newPipelineData) throws NoValidObjectsReturned {
+	private Pipeline createPipeline(StringBuilder newPipelineData) throws NoValidObjectsReturned {
 		Pipeline pipeline = null;
 		ObjectMapper mapper = new ObjectMapper();
 		StringEntity entity = new StringEntity(newPipelineData.toString(), contentTypeURLEncoded);;
@@ -378,9 +386,7 @@ public class StreakAPIImpl {
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public List<Box> getBoxesInPipeline(String pipelineKey) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.getBoxesInPipeline()");
@@ -602,11 +608,12 @@ public class StreakAPIImpl {
 			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
-				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.getStagesInPipeline()");
+				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.getAllStagesInPipeline()");
 			}
 			stages = mapper.readValue(response.getEntity().getContent(), Stages.class);
 		} catch (IllegalStateException | URISyntaxException | IOException e) {
 			e.printStackTrace();
+			throw new RuntimeException("Caught Illegal-State/URISyntax/IO Exception at StreakAPI.getAllStagesInPipeline()");
 		}
 		finally {
 			try {
@@ -614,6 +621,7 @@ public class StreakAPIImpl {
 				streakConnUtil.closeHttpClient(httpClient);
 			} catch (IOException e) {
 				e.printStackTrace();
+				throw new RuntimeException("IO Exception at StreakAPI.getAllStagesInPipeline()");
 			}
 		}
 		return stages;
@@ -653,7 +661,7 @@ public class StreakAPIImpl {
 	 * @return
 	 * @throws NoValidObjectsReturned
 	 */
-	public Stage createStage(String pipelineKey, StringBuilder newStageData) throws NoValidObjectsReturned {
+	private Stage createStage(String pipelineKey, StringBuilder newStageData) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
 		StringEntity entity = new StringEntity(newStageData.toString(), contentTypeURLEncoded);;
 		Stage stage = null;
@@ -844,7 +852,7 @@ public class StreakAPIImpl {
 		return field;
 	}
 
-	public Field createField(String pipelineKey, StringBuilder newFieldData) throws NoValidObjectsReturned {
+	private Field createField(String pipelineKey, StringBuilder newFieldData) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
 		StringEntity entity = new StringEntity(newFieldData.toString(), contentTypeURLEncoded);
 		Field field = null;

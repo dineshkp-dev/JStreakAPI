@@ -27,3 +27,13 @@ A Java implementation for the Streak API that allows users to use functions of S
 # Usage:
 Create a new instance of the StreakAPI as below:
 StreakAPI streakAPI = new StreakAPIImpl(userKey); 
+
+
+NOTE:
+- POJO files were generated using 'jsonschema2pojo.org'
+
+=====
+( )+(private (\w+(<\w+> |<\w+, \w+> | )))
+ * <li>
+ ( = (\w+) (.+)|</li>)
+ </li>

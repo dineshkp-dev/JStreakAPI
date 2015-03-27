@@ -11,6 +11,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.streakapi.crm.impl.StreakAPIImpl;
 
+/**
+ * 
+ * The User object contains the following information about a User.  
+ * <li>email</li>
+ * <li>lowercaseEmail</li>
+ * <li>creationTimestamp (in dd-MM-yyyy, HH:00:00 format) </li>
+ * <li>lastUpdatedTimestamp (in dd-MM-yyyy, HH:00:00 format) </li>
+ * <li>lastSeenTimestamp (in dd-MM-yyyy, HH:00:00 format) </li>
+ * <li>isOauthComplete</li>
+ * <li>userKey</li>
+ * <li>displayName</li>
+ * <li>key</li>
+ * <li>otherItemsMap (Contains a Map of other items from Streak API that are not listed above)</li>
+ * 
+ * @see <a href="https://www.streak.com/api/">https://www.streak.com/api/</a>
+ * @author dineshkp
+ */
 public class User{
 
 	private String email;
@@ -19,6 +36,7 @@ public class User{
 	private String creationTimestamp;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy,HH:00:00")
 	private Calendar lastUpdatedTimestamp;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy,HH:00:00")
 	private Calendar lastSeenTimestamp;
 	@JsonProperty("isOauthComplete")
 	private boolean isOauthComplete; 
