@@ -30,11 +30,11 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.streakapi.crm.api.IStreakURIBuilderUtil;
+import com.streakapi.crm.datatype.User;
 import com.streakapi.crm.exceptions.NoValidObjectsReturned;
-import com.streakapi.crm.queryStreak.StreakAPIImpl;
-import com.streakapi.crm.queryStreak.resources.streakObjects.User;
+import com.streakapi.crm.impl.StreakAPIImpl;
 import com.streakapi.crm.utils.StreakConnectionUtil;
-import com.streakapi.crm.utils.StreakURIBuilderUtil;
 import com.streakapi.crm.utils.StreakURIBuilderUtilImpl;
 
 /**
@@ -46,7 +46,7 @@ import com.streakapi.crm.utils.StreakURIBuilderUtilImpl;
 public class TestStreakAPI {
 	StreakAPIImpl streakapi = new StreakAPIImpl("");
 	StreakConnectionUtil streakConnUtilTest = new StreakConnectionUtil();
-	StreakURIBuilderUtil streakURI = new StreakURIBuilderUtilImpl();
+	IStreakURIBuilderUtil streakURI = new StreakURIBuilderUtilImpl();
 
 	public TestStreakAPI() {
 		//		PowerMockito.mock(StreakAPI.class);

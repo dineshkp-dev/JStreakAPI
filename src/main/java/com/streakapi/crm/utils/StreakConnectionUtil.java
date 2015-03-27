@@ -19,8 +19,6 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-import com.streakapi.crm.queryStreak.resources.StreakBaseURI;
-
 /**
  * @author dineshkp
  *

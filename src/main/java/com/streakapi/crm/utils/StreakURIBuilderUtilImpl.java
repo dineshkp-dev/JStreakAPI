@@ -5,9 +5,9 @@ import java.net.URISyntaxException;
 
 import org.apache.http.client.utils.URIBuilder;
 
-import com.streakapi.crm.queryStreak.resources.StreakBaseURI;
+import com.streakapi.crm.api.IStreakURIBuilderUtil;
 
-public class StreakURIBuilderUtilImpl implements StreakURIBuilderUtil {
+public class StreakURIBuilderUtilImpl implements IStreakURIBuilderUtil {
 	
 	
 	private static URI streakBaseURI = new StreakBaseURI().getUri();

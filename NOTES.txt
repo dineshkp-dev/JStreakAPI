@@ -9,6 +9,8 @@
 		- all the utils
 	- tool
 		- Main class to instantiate and run the API client as a JAR.
+	- exceptions
+		- Exceptions that could be thrown from the implementation.
 
 2. Implementation for JAR file access and usage:
 # JStreakAPI
