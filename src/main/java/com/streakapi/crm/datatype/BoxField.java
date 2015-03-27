@@ -10,6 +10,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+/**
+ * The BoxField object contains the following information:  
+ * <li>key(Field-Key)</li>
+ * <li>value(Field-Value)</li>
+ * <li>otherItemsMap (Contains a Map of other items from Streak API that are not listed above) </li>
+ * @see <a href="https://www.streak.com/api/">https://www.streak.com/api/</a>
+ * @author dineshkp
+ * 
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
 	"key",
@@ -20,7 +29,7 @@ public class BoxField {
 	private String key;
 	private String value;
 	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private Map<String, Object> otherItemsMap = new HashMap<String, Object>();
 
 	/**
 	 * 
@@ -63,12 +72,12 @@ public class BoxField {
 
 	@JsonAnyGetter
 	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
+		return this.otherItemsMap;
 	}
 
 	@JsonAnySetter
 	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
+		this.otherItemsMap.put(name, value);
 	}
 
 }

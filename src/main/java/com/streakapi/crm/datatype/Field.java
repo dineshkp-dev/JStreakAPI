@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * The Field object contains the following information:  
- * <li>name</li>
- * <li>key</li>
+ * <li>name(Field-Name)</li>
+ * <li>key(Field-Key)</li>
  * <li>TYPE(ENUM Supported types: 'TEXT_INPUT', 'DATE', 'PERSON')</li>
  * <li>otherItemsMap (Contains a Map of other items from Streak API that are not listed above) </li>
  * @see <a href="https://www.streak.com/api/">https://www.streak.com/api/</a>

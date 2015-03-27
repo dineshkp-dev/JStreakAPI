@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.streakapi.crm.datatype.Box;
+import com.streakapi.crm.datatype.BoxField;
 import com.streakapi.crm.datatype.Field;
 import com.streakapi.crm.datatype.Pipeline;
 import com.streakapi.crm.datatype.Stage;
@@ -273,7 +274,47 @@ public interface IStreakAPI {
 	 */
 	public boolean deleteField(String pipelineKey, String fieldKey) throws NoValidObjectsReturned;
 	
+	/**
+	 * Edit an existing Field in a Pipeline and returns the Field after editing.
+	 * @param pipelineKey
+	 * @param fieldKey
+	 * @param field
+	 * @return Field
+	 * @see Field
+	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
+	 * @throws NoValidObjectsReturned
+	 */
+	public Field editField(String pipelineKey, String fieldKey, Field field) throws NoValidObjectsReturned;
 	
+	/**
+	 * Get a &lt;List> of all the Box's-Fields in a Box.
+	 * @param boxKey
+	 * @return &lt;List>BoxField
+	 * @see BoxField
+	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
+	 * @throws NoValidObjectsReturned
+	 */
+	public List<BoxField> getAllFieldsInBox(String boxKey) throws NoValidObjectsReturned;
 	
+	/**
+	 * Get a specific Box's Field Object.
+	 * @param boxKey
+	 * @param fieldKey
+	 * @return BoxField
+	 * @see BoxField
+	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
+	 * @throws NoValidObjectsReturned
+	 */
+	public BoxField getBoxField(String boxKey, String fieldKey) throws NoValidObjectsReturned;
 	
+	/**
+	 * Edit an Existing Box's Field Value.
+	 * @param boxKey
+	 * @param fieldKey
+	 * @return BoxField
+	 * @see BoxField
+	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
+	 * @throws NoValidObjectsReturned
+	 */
+	public BoxField editFieldValue(String boxKey, String fieldKey, BoxField boxField) throws NoValidObjectsReturned;
 }
