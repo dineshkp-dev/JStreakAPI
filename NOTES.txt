@@ -10,4 +10,18 @@
 	- tool
 		- Main class to instantiate and run the API client as a JAR.
 
-		
+2. Implementation for JAR file access and usage:
+# JStreakAPI
+
+A Java implementation for the Streak API that allows users to use functions of Streak without having to create their own REST queries.
+===
+# Download and build:
+- Install as Maven project and build JAR file.
+#Dependencies:
+- 'Apache HTTP Components' (for all Http communications with Streak)
+- 'Jackson' (for JSON parsing & object creation)
+- 'PowerMock-with-JUnit & Mockito' (for unit testing)
+
+# Usage:
+Create a new instance of the StreakAPI as below:
+StreakAPI streakAPI = new StreakAPIImpl(userKey); 
