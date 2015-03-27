@@ -92,7 +92,7 @@ public class StreakAPIImpl {
 			httpClient = streakConnUtil.startHttpClient();
 			httpGet = new HttpGet(streakURI.getCurrentUserURI());
 			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
-
+			System.err.println("Got response...");
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
 				throw new NoValidObjectsReturned("No valid data for Streak Query at User.class:getCurrentUser()");
 			}

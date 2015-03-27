@@ -10,25 +10,17 @@ import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URISyntaxException;
-import java.nio.charset.Charset;
 
-import javax.swing.text.html.parser.Entity;
-
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpResponseFactory;
 import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.ContentType;
-import org.apache.http.entity.HttpEntityWrapper;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicStatusLine;
@@ -38,8 +30,9 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.fasterxml.jackson.core.io.CharTypes;
+import com.streakapi.crm.exceptions.NoValidObjectsReturned;
 import com.streakapi.crm.queryStreak.StreakAPIImpl;
+import com.streakapi.crm.queryStreak.resources.streakObjects.User;
 import com.streakapi.crm.utils.StreakConnectionUtil;
 import com.streakapi.crm.utils.StreakURIBuilderUtil;
 import com.streakapi.crm.utils.StreakURIBuilderUtilImpl;
@@ -135,7 +128,14 @@ public class TestStreakAPI {
 			mockHttpResponse.setEntity(new StringEntity("{jSON String}", ContentType.APPLICATION_JSON));
 			
 			
-			when(mockHttpClient.execute(targetHost, httpGet, streakConnUtilTest.getHttpClientContext()));//.then
+			when(mockHttpClient.execute(targetHost, httpGet, streakConnUtilTest.getHttpClientContext())).thenReturn(mockHttpResponse);//.then
+			
+/*			try {
+				User user = streakapi.getCurrentUser();
+				
+			} catch (NoValidObjectsReturned e) {
+				e.printStackTrace();
+			}*/
 			
 			} catch (IOException | URISyntaxException e) {
 			// TODO Auto-generated catch block
