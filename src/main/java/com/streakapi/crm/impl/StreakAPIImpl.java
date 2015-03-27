@@ -31,6 +31,7 @@ import com.streakapi.crm.datatype.Box;
 import com.streakapi.crm.datatype.BoxField;
 import com.streakapi.crm.datatype.Field;
 import com.streakapi.crm.datatype.Pipeline;
+import com.streakapi.crm.datatype.Reminder;
 import com.streakapi.crm.datatype.Stage;
 import com.streakapi.crm.datatype.Stages;
 import com.streakapi.crm.datatype.User;
@@ -1063,6 +1064,36 @@ public class StreakAPIImpl implements IStreakAPI{
 			}
 		}
 		return boxField;
+	}
+	
+	public List<Reminder> getAllRemindersForBox(String boxKey) throws NoValidObjectsReturned {
+		System.out.println("StreakAPIImpl.getAllRemindersForBox()");
+		ObjectMapper mapper = new ObjectMapper();
+		List<Reminder> reminders = null;
+
+		try {
+			httpClient = streakConnUtil.startHttpClient();
+			httpGet = new HttpGet(streakURI.getAllRemindersForBox(boxKey));
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
+
+			if (!StreakConnectionUtil.checkHttpResponse(response)) {
+				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.class:getAllPipelines()");
+			}
+			System.out.println(mapper.getClass());
+			JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Reminder.class);
+			reminders = mapper.readValue(response.getEntity().getContent(), type);
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				response.close();
+				streakConnUtil.closeHttpClient(httpClient);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return reminders;
 	}
 
 }

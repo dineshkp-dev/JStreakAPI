@@ -10,6 +10,7 @@ import com.streakapi.crm.datatype.Box;
 import com.streakapi.crm.datatype.BoxField;
 import com.streakapi.crm.datatype.Field;
 import com.streakapi.crm.datatype.Pipeline;
+import com.streakapi.crm.datatype.Reminder;
 import com.streakapi.crm.datatype.Stage;
 import com.streakapi.crm.datatype.Stages;
 import com.streakapi.crm.datatype.User;
@@ -317,4 +318,14 @@ public interface IStreakAPI {
 	 * @throws NoValidObjectsReturned
 	 */
 	public BoxField editFieldValue(String boxKey, String fieldKey, BoxField boxField) throws NoValidObjectsReturned;
+	
+	/**
+	 * Gets a &lt;List> of all the Reminders available in a specific Box.
+	 * @param boxKey
+	 * @return Reminder
+	 * @see Reminder
+	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
+	 * @throws NoValidObjectsReturned
+	 */
+	public List<Reminder> getAllRemindersForBox(String boxKey) throws NoValidObjectsReturned;
 }

@@ -1,71 +1,296 @@
 package com.streakapi.crm.datatype;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Generated;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+/**
+ * The Box object contains the following information about a Box in Streak.  
+ * <li>creatorKey</li>
+ * <li>creationDate (in dd-MM-yyyy, HH:00:00 format) </li>
+ * <li>remindDate (in dd-MM-yyyy, HH:00:00 format) </li>
+ * <li>message</li>
+ * <li>remindFollowers</li>
+ * <li>boxKey</li>
+ * <li>pipelineKey</li>
+ * <li>status</li>
+ * <li>reminderKey</li>
+ * <li>creatorName</li>
+ * <li>key</li>
+ * <li>otherItemsMap (Contains a Map of other items from Streak API that are not listed above) </li>
+ * @see <a href="https://www.streak.com/api/">https://www.streak.com/api/</a>
+ * @author dineshkp
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+	"creatorKey",
+	"creationDate",
+	"remindDate",
+	"message",
+	"remindFollowers",
+	"boxKey",
+	"pipelineKey",
+	"status",
+	"reminderKey",
+	"creatorName",
+	"key"
+})
 public class Reminder {
+
 	private String creatorKey;
-	private String creationDate;
-	private String remindDate;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy,HH:00:00")
+	private Long creationDate;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy,HH:00:00")
+	private Long remindDate;
 	private String message;
-	private ReminderStatus status;
+	private Boolean remindFollowers;
+	private String boxKey;
+	private String pipelineKey;
+	private String status;
+	private String reminderKey;
+	private String creatorName;
+	private String key;
+	@JsonIgnore
+	private Map<String, Object> otherItemsMap = new HashMap<String, Object>();
+
 	/**
-	 * @return the creatorKey
+	 * 
+	 * @return
+	 * The creatorKey
 	 */
+	@JsonIgnore
 	public String getCreatorKey() {
 		return creatorKey;
 	}
+
 	/**
-	 * @param creatorKey the creatorKey to set
+	 * 
+	 * @param creatorKey
+	 * The creatorKey
 	 */
+	@JsonProperty("creatorKey")
 	public void setCreatorKey(String creatorKey) {
 		this.creatorKey = creatorKey;
 	}
+
 	/**
-	 * @return the creationDate
+	 * 
+	 * @return
+	 * The creationDate
 	 */
-	public String getCreationDate() {
+	@JsonIgnore
+	public Long getCreationDate() {
 		return creationDate;
 	}
+
 	/**
-	 * @param creationDate the creationDate to set
+	 * 
+	 * @param creationDate
+	 * The creationDate
 	 */
-	public void setCreationDate(String creationDate) {
+	@JsonProperty("creationDate")
+	public void setCreationDate(Long creationDate) {
 		this.creationDate = creationDate;
 	}
+
 	/**
-	 * @return the remindDate
+	 * 
+	 * @return
+	 * The remindDate
 	 */
-	public String getRemindDate() {
+	@JsonIgnore
+	public Long getRemindDate() {
 		return remindDate;
 	}
+
 	/**
-	 * @param remindDate the remindDate to set
+	 * 
+	 * @param remindDate
+	 * The remindDate
 	 */
-	public void setRemindDate(String remindDate) {
+	@JsonProperty("remindDate")
+	public void setRemindDate(Long remindDate) {
 		this.remindDate = remindDate;
 	}
+
 	/**
-	 * @return the message
+	 * 
+	 * @return
+	 * The message
 	 */
+	@JsonProperty("message")
 	public String getMessage() {
 		return message;
 	}
+
 	/**
-	 * @param message the message to set
+	 * 
+	 * @param message
+	 * The message
 	 */
+	@JsonProperty("message")
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 	/**
-	 * @return the status
+	 * 
+	 * @return
+	 * The remindFollowers
 	 */
-	public ReminderStatus getStatus() {
+	@JsonProperty("remindFollowers")
+	public Boolean getRemindFollowers() {
+		return remindFollowers;
+	}
+
+	/**
+	 * 
+	 * @param remindFollowers
+	 * The remindFollowers
+	 */
+	@JsonProperty("remindFollowers")
+	public void setRemindFollowers(Boolean remindFollowers) {
+		this.remindFollowers = remindFollowers;
+	}
+
+	/**
+	 * 
+	 * @return
+	 * The boxKey
+	 */
+	@JsonIgnore
+	public String getBoxKey() {
+		return boxKey;
+	}
+
+	/**
+	 * 
+	 * @param boxKey
+	 * The boxKey
+	 */
+	@JsonProperty("boxKey")
+	public void setBoxKey(String boxKey) {
+		this.boxKey = boxKey;
+	}
+
+	/**
+	 * 
+	 * @return
+	 * The pipelineKey
+	 */
+	@JsonIgnore
+	public String getPipelineKey() {
+		return pipelineKey;
+	}
+
+	/**
+	 * 
+	 * @param pipelineKey
+	 * The pipelineKey
+	 */
+	@JsonProperty("pipelineKey")
+	public void setPipelineKey(String pipelineKey) {
+		this.pipelineKey = pipelineKey;
+	}
+
+	/**
+	 * 
+	 * @return
+	 * The status
+	 */
+	@JsonIgnore
+	public String getStatus() {
 		return status;
 	}
+
 	/**
-	 * @param status the status to set
+	 * 
+	 * @param status
+	 * The status
 	 */
-	public void setStatus(ReminderStatus status) {
+	@JsonProperty("status")
+	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
+	/**
+	 * 
+	 * @return
+	 * The reminderKey
+	 */
+	@JsonIgnore
+	public String getReminderKey() {
+		return reminderKey;
+	}
+
+	/**
+	 * 
+	 * @param reminderKey
+	 * The reminderKey
+	 */
+	@JsonProperty("reminderKey")
+	public void setReminderKey(String reminderKey) {
+		this.reminderKey = reminderKey;
+	}
+
+	/**
+	 * 
+	 * @return
+	 * The creatorName
+	 */
+	@JsonIgnore
+	public String getCreatorName() {
+		return creatorName;
+	}
+
+	/**
+	 * 
+	 * @param creatorName
+	 * The creatorName
+	 */
+	@JsonProperty("creatorName")
+	public void setCreatorName(String creatorName) {
+		this.creatorName = creatorName;
+	}
+
+	/**
+	 * 
+	 * @return
+	 * The key
+	 */
+	@JsonIgnore
+	public String getKey() {
+		return key;
+	}
+
+	/**
+	 * 
+	 * @param key
+	 * The key
+	 */
+	@JsonProperty("key")
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	@JsonAnyGetter
+	public Map<String, Object> getAdditionalProperties() {
+		return this.otherItemsMap;
+	}
+
+	@JsonAnySetter
+	public void setAdditionalProperty(String name, Object value) {
+		this.otherItemsMap.put(name, value);
+	}
 
 }

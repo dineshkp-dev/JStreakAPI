@@ -220,4 +220,12 @@ public interface IStreakURIBuilderUtil {
 	 */
 	URI getEditFieldValueURI(String boxKey, String fieldKey) throws URISyntaxException;
 	
+	/**
+	 * Returns the URI: <i>https://www.streak.com/api/v1/boxes/{boxKey}/reminders</i>
+	 * @return
+	 * @throws URISyntaxException
+	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
+	 */
+	URI getAllRemindersForBox(String boxKey) throws URISyntaxException;
+	
 }

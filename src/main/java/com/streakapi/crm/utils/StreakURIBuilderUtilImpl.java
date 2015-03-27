@@ -193,7 +193,12 @@ public class StreakURIBuilderUtilImpl implements IStreakURIBuilderUtil {
 	public URI getEditFieldValueURI(String boxKey, String fieldKey) throws URISyntaxException {
 		return new URIBuilder(streakBaseURI.toString()+"/boxes/"+boxKey+"/fields/"+fieldKey).build();
 	}
-	
-	
+
+	/** 
+	 * {@inheritDoc}
+	 */
+	public URI getAllRemindersForBox(String boxKey) throws URISyntaxException {
+		return new URIBuilder(streakBaseURI.toString()+"/boxes/"+boxKey+"/reminders").build();
+	}
 	
 }
