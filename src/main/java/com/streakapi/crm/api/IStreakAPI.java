@@ -322,10 +322,30 @@ public interface IStreakAPI {
 	/**
 	 * Gets a &lt;List> of all the Reminders available in a specific Box.
 	 * @param boxKey
-	 * @return Reminder
+	 * @return List&lt;Reminder>
 	 * @see Reminder
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
 	 */
 	public List<Reminder> getAllRemindersForBox(String boxKey) throws NoValidObjectsReturned;
+	
+	/**
+	 * Gets a specific Reminder from any of the Pipelines.
+	 * @param reminderKey
+	 * @return Reminder
+	 * @see Reminder
+	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
+	 * @throws NoValidObjectsReturned
+	 */
+	public Reminder getReminder(String reminderKey) throws NoValidObjectsReturned;
+	
+	/**
+	 * Gets a specific Reminder from any of the Pipelines.
+	 * @param reminderKey
+	 * @return Reminder
+	 * @see Reminder
+	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
+	 * @throws NoValidObjectsReturned
+	 */
+	public Reminder createReminder(String boxKey, String message, Long reminDate, boolean remindFollowers) throws NoValidObjectsReturned;
 }

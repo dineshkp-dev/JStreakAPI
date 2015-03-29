@@ -284,12 +284,12 @@ public class Reminder {
 	}
 
 	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
+	public Map<String, Object> getOtherItemsMap() {
 		return this.otherItemsMap;
 	}
 
 	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
+	public void setOtherItemsMap(String name, Object value) {
 		this.otherItemsMap.put(name, value);
 	}
 

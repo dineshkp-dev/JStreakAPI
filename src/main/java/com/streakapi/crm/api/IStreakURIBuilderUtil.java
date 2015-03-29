@@ -226,6 +226,22 @@ public interface IStreakURIBuilderUtil {
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
-	URI getAllRemindersForBox(String boxKey) throws URISyntaxException;
+	URI getAllRemindersForBoxURI(String boxKey) throws URISyntaxException;
+	
+	/**
+	 * Returns the URI: <i>https://www.streak.com/api/v1/reminders/{reminderKey}</i>
+	 * @return
+	 * @throws URISyntaxException
+	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
+	 */
+	URI getReminderURI(String reminderKey) throws URISyntaxException;
+	
+	/**
+	 * Returns the URI: <i>https://www.streak.com/api/v1/boxes/{boxKey}/reminders</i>
+	 * @return
+	 * @throws URISyntaxException
+	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
+	 */
+	URI createReminderURI(String boxKey) throws URISyntaxException;
 	
 }

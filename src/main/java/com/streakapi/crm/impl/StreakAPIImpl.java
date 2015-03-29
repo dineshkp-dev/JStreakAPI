@@ -58,7 +58,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	private ContentType contentTypeJSON = ContentType.APPLICATION_JSON;
 	private ContentType contentTypeURLEncoded = ContentType.APPLICATION_FORM_URLENCODED;
 	private IStreakURIBuilderUtil streakURI = new StreakURIBuilderUtilImpl();
-	
+
 	private StreakConnectionUtil streakConnUtil = null;
 
 	public StreakAPIImpl() {	}
@@ -74,7 +74,7 @@ public class StreakAPIImpl implements IStreakAPI{
 		this.authCache = streakConnUtil.createAuthCache();
 		this.context = streakConnUtil.getHttpClientContext();
 	}
-	
+
 	public StreakConnectionUtil getStreakConnectionUtil() {
 		return this.streakConnUtil;
 	}
@@ -86,7 +86,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	private HttpHost getTargetHost() {
 		return this.targetHost;
 	}
-	
+
 
 	/**
 	 * {@inheritDoc}
@@ -452,7 +452,7 @@ public class StreakAPIImpl implements IStreakAPI{
 		}
 		return box;
 	}
-	
+
 	/**
 	 * @param pipelineKey
 	 * @param newBoxData
@@ -1065,7 +1065,7 @@ public class StreakAPIImpl implements IStreakAPI{
 		}
 		return boxField;
 	}
-	
+
 	public List<Reminder> getAllRemindersForBox(String boxKey) throws NoValidObjectsReturned {
 		System.out.println("StreakAPIImpl.getAllRemindersForBox()");
 		ObjectMapper mapper = new ObjectMapper();
@@ -1073,7 +1073,7 @@ public class StreakAPIImpl implements IStreakAPI{
 
 		try {
 			httpClient = streakConnUtil.startHttpClient();
-			httpGet = new HttpGet(streakURI.getAllRemindersForBox(boxKey));
+			httpGet = new HttpGet(streakURI.getAllRemindersForBoxURI(boxKey));
 			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
 
 			if (!StreakConnectionUtil.checkHttpResponse(response)) {
@@ -1095,5 +1095,88 @@ public class StreakAPIImpl implements IStreakAPI{
 		}
 		return reminders;
 	}
+
+	public Reminder getReminder(String reminderKey) throws NoValidObjectsReturned {
+		System.out.println("StreakAPIImpl.getReminder()");
+		ObjectMapper mapper = new ObjectMapper();
+		Reminder reminder = null;
+
+		try {
+			httpClient = streakConnUtil.startHttpClient();
+			httpGet = new HttpGet(streakURI.getReminderURI(reminderKey));
+			response = httpClient.execute(this.getTargetHost(), httpGet, this.getContext());
+
+			if (!StreakConnectionUtil.checkHttpResponse(response)) {
+				throw new NoValidObjectsReturned("No valid data for Streak Query at Pipeline.class:getAllPipelines()");
+			}
+			System.out.println(mapper.getClass());
+			reminder = mapper.readValue(response.getEntity().getContent(), Reminder.class);
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				response.close();
+				streakConnUtil.closeHttpClient(httpClient);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return reminder;
+	}
+
+	private Reminder createReminder(String boxKey, StringBuilder newReminderData) throws NoValidObjectsReturned {
+		ObjectMapper mapper = new ObjectMapper();
+		StringEntity entity = new StringEntity(newReminderData.toString(), contentTypeURLEncoded);
+		Reminder reminder = null;
+
+		try {
+			httpClient = streakConnUtil.startHttpClient();
+			httpPut = new HttpPut(streakURI.getCreateFieldURI(boxKey));
+			httpPut.setEntity(entity);
+
+			response = httpClient.execute(this.getTargetHost(), httpPut, this.getContext());
+
+			if (!StreakConnectionUtil.checkHttpResponse(response)) {
+				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
+			}
+			reminder = mapper.readValue(response.getEntity().getContent(), Reminder.class);
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				response.close();
+				streakConnUtil.closeHttpClient(httpClient);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return reminder;
+	}
+
+	/**
+	 * @param pipelineKey
+	 * @param fieldName
+	 * @param fieldType
+	 * @return
+	 * @throws NoValidObjectsReturned
+	 */
+	public Reminder createReminder(String boxKey, String message, Long remindDate, boolean remindFollowers ) throws NoValidObjectsReturned {
+		StringBuilder newReminderData = new StringBuilder();
+		if (message != null && message.length() != 0){
+			throw new RuntimeException("Message field for Reminder cannot be empty/null.");
+		}
+		else if (remindDate != null && remindDate.intValue() != 0) {
+			throw new RuntimeException("Remind Date field for Reminder cannot be empty/null.");
+		}
+
+		newReminderData.append("remindDate=" + remindDate);
+		newReminderData.append("&remindFollowers="+ remindFollowers);
+		newReminderData.append("&message="+message);
+		return createReminder(boxKey, newReminderData);
+	}
+
+
 
 }
