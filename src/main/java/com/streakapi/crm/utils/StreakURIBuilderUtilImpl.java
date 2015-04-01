@@ -214,4 +214,18 @@ public class StreakURIBuilderUtilImpl implements IStreakURIBuilderUtil {
 	public URI createReminderURI(String boxKey) throws URISyntaxException {
 		return new URIBuilder(streakBaseURI.toString()+"/boxes/"+boxKey+"/reminders").build();
 	}
+	
+	/** 
+	 * {@inheritDoc}
+	 */
+	public URI getDeleteReminderURI(String reminderKey) throws URISyntaxException {
+		return new URIBuilder(streakBaseURI.toString()+"/reminders/"+reminderKey).build();
+	}
+	
+	/** 
+	 * {@inheritDoc}
+	 */
+	public URI getEditReminderURI(String reminderKey) throws URISyntaxException {
+		return new URIBuilder(streakBaseURI.toString()+"/reminders/"+reminderKey).build();
+	}
 }

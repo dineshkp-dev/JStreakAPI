@@ -1177,6 +1177,67 @@ public class StreakAPIImpl implements IStreakAPI{
 		return createReminder(boxKey, newReminderData);
 	}
 
+	public boolean deleteReminder(String reminderKey) throws NoValidObjectsReturned {
+		Boolean success = false;
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,String> mapDeleteResults = null;
+
+		try {
+			httpClient = streakConnUtil.startHttpClient();
+			httpDelete = new HttpDelete(streakURI.getDeleteReminderURI(reminderKey));
+
+			response = httpClient.execute(this.getTargetHost(), httpDelete, this.getContext());
+
+			if (!StreakConnectionUtil.checkHttpResponse(response)) {
+				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.createBox()");
+			}
+			mapDeleteResults = mapper.readValue(response.getEntity().getContent(), new TypeReference<HashMap<String, String>>(){});
+			success = Boolean.parseBoolean(mapDeleteResults.get("success"));
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				response.close();
+				streakConnUtil.closeHttpClient(httpClient);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return success;
+	}
+
+	public Reminder editReminder(String reminderKey, Reminder reminder) throws NoValidObjectsReturned {
+		System.out.println("StreakAPI.editBox()");
+		ObjectMapper mapper = new ObjectMapper();
+		HttpEntity entity = null;
+
+		try {
+			httpClient = streakConnUtil.startHttpClient();
+			httpPost = new HttpPost(streakURI.getEditReminderURI(reminderKey));
+			String jSONString = mapper.writeValueAsString(reminder);
+			entity = new StringEntity(jSONString, contentTypeJSON);
+			httpPost.setEntity(entity);
+
+			response = httpClient.execute(this.getTargetHost(), httpPost, this.getContext());
+
+			if (!StreakConnectionUtil.checkHttpResponse(response)) {
+				throw new NoValidObjectsReturned("No valid data for Streak Query at StreakAPI.class:editBox()");
+			}
+			reminder = mapper.readValue(response.getEntity().getContent(), Reminder.class);
+		} catch (IllegalStateException | URISyntaxException | IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				response.close();
+				streakConnUtil.closeHttpClient(httpClient);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return reminder;
+	}
 
 
 }

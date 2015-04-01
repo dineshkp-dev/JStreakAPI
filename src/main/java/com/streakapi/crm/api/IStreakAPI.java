@@ -348,4 +348,26 @@ public interface IStreakAPI {
 	 * @throws NoValidObjectsReturned
 	 */
 	public Reminder createReminder(String boxKey, String message, Long reminDate, boolean remindFollowers) throws NoValidObjectsReturned;
+	
+	/**
+	 * Deletes an existing Reminder in a Pipeline and returns 'true' if successful.
+	 * @param reminderKey
+	 * @return boolean
+	 * @see Field
+	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
+	 * @throws NoValidObjectsReturned
+	 */
+	public boolean deleteReminder(String reminderKey) throws NoValidObjectsReturned;
+	
+	/**
+	 * Edit an Existing Reminder's Value.
+	 * @param reminderKey
+	 * @param reminder
+	 * @return Reminder
+	 * @see Reminder
+	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
+	 * @throws NoValidObjectsReturned
+	 */
+	public Reminder editReminder(String reminderKey, Reminder reminder) throws NoValidObjectsReturned;
+	
 }
