@@ -61,7 +61,7 @@ public class StreakAPIImpl implements IStreakAPI{
 
 	private StreakConnectionUtil streakConnUtil = null;
 
-	public StreakAPIImpl() {	}
+	StreakAPIImpl() {	}
 
 	public StreakAPIImpl(String userKey) {
 		initStreakConnection(userKey);
