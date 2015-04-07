@@ -293,4 +293,74 @@ public class Reminder {
 		this.otherItemsMap.put(name, value);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Reminder [");
+		if (creatorKey != null) {
+			builder.append("creatorKey=");
+			builder.append(creatorKey);
+			builder.append(", ");
+		}
+		if (creationDate != null) {
+			builder.append("creationDate=");
+			builder.append(creationDate);
+			builder.append(", ");
+		}
+		if (remindDate != null) {
+			builder.append("remindDate=");
+			builder.append(remindDate);
+			builder.append(", ");
+		}
+		if (message != null) {
+			builder.append("message=");
+			builder.append(message);
+			builder.append(", ");
+		}
+		if (remindFollowers != null) {
+			builder.append("remindFollowers=");
+			builder.append(remindFollowers);
+			builder.append(", ");
+		}
+		if (boxKey != null) {
+			builder.append("boxKey=");
+			builder.append(boxKey);
+			builder.append(", ");
+		}
+		if (pipelineKey != null) {
+			builder.append("pipelineKey=");
+			builder.append(pipelineKey);
+			builder.append(", ");
+		}
+		if (status != null) {
+			builder.append("status=");
+			builder.append(status);
+			builder.append(", ");
+		}
+		if (reminderKey != null) {
+			builder.append("reminderKey=");
+			builder.append(reminderKey);
+			builder.append(", ");
+		}
+		if (creatorName != null) {
+			builder.append("creatorName=");
+			builder.append(creatorName);
+			builder.append(", ");
+		}
+		if (key != null) {
+			builder.append("key=");
+			builder.append(key);
+			builder.append(", ");
+		}
+		if (otherItemsMap != null) {
+			builder.append("otherItemsMap=");
+			builder.append(otherItemsMap);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

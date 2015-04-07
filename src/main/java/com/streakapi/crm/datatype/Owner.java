@@ -89,4 +89,29 @@ public class Owner {
         return this;
     }
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Owner [");
+		if (email != null) {
+			builder.append("email=");
+			builder.append(email);
+			builder.append(", ");
+		}
+		if (isOwner != null) {
+			builder.append("isOwner=");
+			builder.append(isOwner);
+			builder.append(", ");
+		}
+		if (additionalProperties != null) {
+			builder.append("additionalProperties=");
+			builder.append(additionalProperties);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+    
 }

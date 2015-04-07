@@ -41,5 +41,39 @@ public class Thread {
 	public String getFileAttachments() {
 		return fileAttachments;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Thread [");
+		if (subject != null) {
+			builder.append("subject=");
+			builder.append(subject);
+			builder.append(", ");
+		}
+		if (nameEmailAddress != null) {
+			builder.append("nameEmailAddress=");
+			builder.append(nameEmailAddress);
+			builder.append(", ");
+		}
+		if (lastEmailTimestamp != null) {
+			builder.append("lastEmailTimestamp=");
+			builder.append(lastEmailTimestamp);
+			builder.append(", ");
+		}
+		if (threadGmailId != null) {
+			builder.append("threadGmailId=");
+			builder.append(threadGmailId);
+			builder.append(", ");
+		}
+		if (fileAttachments != null) {
+			builder.append("fileAttachments=");
+			builder.append(fileAttachments);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

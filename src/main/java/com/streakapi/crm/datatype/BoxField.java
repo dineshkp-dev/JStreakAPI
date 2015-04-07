@@ -80,4 +80,28 @@ public class BoxField {
 		this.otherItemsMap.put(name, value);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("BoxField [");
+		if (key != null) {
+			builder.append("key=");
+			builder.append(key);
+			builder.append(", ");
+		}
+		if (value != null) {
+			builder.append("value=");
+			builder.append(value);
+			builder.append(", ");
+		}
+		if (otherItemsMap != null) {
+			builder.append("otherItemsMap=");
+			builder.append(otherItemsMap);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }

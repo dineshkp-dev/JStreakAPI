@@ -43,5 +43,26 @@ public class AclEntry {
 	public void setOwner(boolean isOwner) {
 		this.isOwner = isOwner;
 	}
-
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("AclEntry [");
+		if (fullName != null) {
+			builder.append("fullName=");
+			builder.append(fullName);
+			builder.append(", ");
+		}
+		if (email != null) {
+			builder.append("email=");
+			builder.append(email);
+			builder.append(", ");
+		}
+		builder.append("isOwner=");
+		builder.append(isOwner);
+		builder.append("]");
+		return builder.toString();
+	}
 }

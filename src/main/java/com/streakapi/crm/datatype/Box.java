@@ -506,4 +506,99 @@ public class Box {
         return this;
     }
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Box [");
+		if (pipelineKey != null) {
+			builder.append("pipelineKey=");
+			builder.append(pipelineKey);
+			builder.append(", ");
+		}
+		if (creatorKey != null) {
+			builder.append("creatorKey=");
+			builder.append(creatorKey);
+			builder.append(", ");
+		}
+		if (creationTimestamp != null) {
+			builder.append("creationTimestamp=");
+			builder.append(creationTimestamp);
+			builder.append(", ");
+		}
+		if (lastUpdatedTimestamp != null) {
+			builder.append("lastUpdatedTimestamp=");
+			builder.append(lastUpdatedTimestamp);
+			builder.append(", ");
+		}
+		if (name != null) {
+			builder.append("name=");
+			builder.append(name);
+			builder.append(", ");
+		}
+		if (notes != null) {
+			builder.append("notes=");
+			builder.append(notes);
+			builder.append(", ");
+		}
+		if (stageKey != null) {
+			builder.append("stageKey=");
+			builder.append(stageKey);
+			builder.append(", ");
+		}
+		if (fields != null) {
+			builder.append("fields=");
+			builder.append(fields);
+			builder.append(", ");
+		}
+		if (followerKeys != null) {
+			builder.append("followerKeys=");
+			builder.append(followerKeys);
+			builder.append(", ");
+		}
+		if (followerCount != null) {
+			builder.append("followerCount=");
+			builder.append(followerCount);
+			builder.append(", ");
+		}
+		if (commentCount != null) {
+			builder.append("commentCount=");
+			builder.append(commentCount);
+			builder.append(", ");
+		}
+		if (reminderCount != null) {
+			builder.append("reminderCount=");
+			builder.append(reminderCount);
+			builder.append(", ");
+		}
+		if (gmailThreadCount != null) {
+			builder.append("gmailThreadCount=");
+			builder.append(gmailThreadCount);
+			builder.append(", ");
+		}
+		if (fileCount != null) {
+			builder.append("fileCount=");
+			builder.append(fileCount);
+			builder.append(", ");
+		}
+		if (boxKey != null) {
+			builder.append("boxKey=");
+			builder.append(boxKey);
+			builder.append(", ");
+		}
+		if (key != null) {
+			builder.append("key=");
+			builder.append(key);
+			builder.append(", ");
+		}
+		if (otherItemsMap != null) {
+			builder.append("otherItemsMap=");
+			builder.append(otherItemsMap);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

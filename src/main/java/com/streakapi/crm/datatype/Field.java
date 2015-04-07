@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class Field {
 
-	public enum TYPE {TEXT_INPUT, DATE, PERSON};
+	public enum TYPE {TEXT_INPUT, DATE, PERSON, DROPDOWN};
 	
     private String name;
     private String key;
@@ -126,5 +126,35 @@ public class Field {
         this.otherItemsMap.put(name, value);
         return this;
     }
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Field [");
+		if (name != null) {
+			builder.append("name=");
+			builder.append(name);
+			builder.append(", ");
+		}
+		if (key != null) {
+			builder.append("key=");
+			builder.append(key);
+			builder.append(", ");
+		}
+		if (type != null) {
+			builder.append("type=");
+			builder.append(type);
+			builder.append(", ");
+		}
+		if (otherItemsMap != null) {
+			builder.append("otherItemsMap=");
+			builder.append(otherItemsMap);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

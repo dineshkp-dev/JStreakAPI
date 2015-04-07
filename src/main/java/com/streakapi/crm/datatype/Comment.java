@@ -44,4 +44,29 @@ public class Comment {
 		this.creatorKey = creatorKey;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Comment [");
+		if (message != null) {
+			builder.append("message=");
+			builder.append(message);
+			builder.append(", ");
+		}
+		if (timestamp != null) {
+			builder.append("timestamp=");
+			builder.append(timestamp);
+			builder.append(", ");
+		}
+		if (creatorKey != null) {
+			builder.append("creatorKey=");
+			builder.append(creatorKey);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }

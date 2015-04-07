@@ -50,4 +50,24 @@ public class Stages {
         this.otherItemsMap.put(name, value);
         return this;
     }
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Stages [");
+		if (otherItemsMap != null) {
+			builder.append("otherItemsMap=");
+			builder.append(otherItemsMap);
+			builder.append(", ");
+		}
+		if (allStages != null) {
+			builder.append("allStages=");
+			builder.append(allStages);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }

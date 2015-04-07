@@ -46,4 +46,43 @@ public class Search {
 	public Integer getRelevanceScore() {
 		return relevanceScore;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Search [");
+		if (resultEntityKey != null) {
+			builder.append("resultEntityKey=");
+			builder.append(resultEntityKey);
+			builder.append(", ");
+		}
+		if (title != null) {
+			builder.append("title=");
+			builder.append(title);
+			builder.append(", ");
+		}
+		if (snippet != null) {
+			builder.append("snippet=");
+			builder.append(snippet);
+			builder.append(", ");
+		}
+		if (displayDate != null) {
+			builder.append("displayDate=");
+			builder.append(displayDate);
+			builder.append(", ");
+		}
+		if (searchResultType != null) {
+			builder.append("searchResultType=");
+			builder.append(searchResultType);
+			builder.append(", ");
+		}
+		if (relevanceScore != null) {
+			builder.append("relevanceScore=");
+			builder.append(relevanceScore);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }

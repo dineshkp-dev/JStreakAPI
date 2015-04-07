@@ -202,6 +202,64 @@ public class User{
 		return otherItemsMap;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [");
+		if (email != null) {
+			builder.append("email=");
+			builder.append(email);
+			builder.append(", ");
+		}
+		if (lowercaseEmail != null) {
+			builder.append("lowercaseEmail=");
+			builder.append(lowercaseEmail);
+			builder.append(", ");
+		}
+		if (creationTimestamp != null) {
+			builder.append("creationTimestamp=");
+			builder.append(creationTimestamp);
+			builder.append(", ");
+		}
+		if (lastUpdatedTimestamp != null) {
+			builder.append("lastUpdatedTimestamp=");
+			builder.append(lastUpdatedTimestamp);
+			builder.append(", ");
+		}
+		if (lastSeenTimestamp != null) {
+			builder.append("lastSeenTimestamp=");
+			builder.append(lastSeenTimestamp);
+			builder.append(", ");
+		}
+		builder.append("isOauthComplete=");
+		builder.append(isOauthComplete);
+		builder.append(", ");
+		if (userKey != null) {
+			builder.append("userKey=");
+			builder.append(userKey);
+			builder.append(", ");
+		}
+		if (displayName != null) {
+			builder.append("displayName=");
+			builder.append(displayName);
+			builder.append(", ");
+		}
+		if (key != null) {
+			builder.append("key=");
+			builder.append(key);
+			builder.append(", ");
+		}
+		if (otherItemsMap != null) {
+			builder.append("otherItemsMap=");
+			builder.append(otherItemsMap);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
 
 
 }

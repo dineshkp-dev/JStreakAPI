@@ -420,4 +420,84 @@ public class Pipeline {
 		return this;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Pipeline [");
+		if (creatorKey != null) {
+			builder.append("creatorKey=");
+			builder.append(creatorKey);
+			builder.append(", ");
+		}
+		if (name != null) {
+			builder.append("name=");
+			builder.append(name);
+			builder.append(", ");
+		}
+		if (description != null) {
+			builder.append("description=");
+			builder.append(description);
+			builder.append(", ");
+		}
+		if (orgWide != null) {
+			builder.append("orgWide=");
+			builder.append(orgWide);
+			builder.append(", ");
+		}
+		if (fields != null) {
+			builder.append("fields=");
+			builder.append(fields);
+			builder.append(", ");
+		}
+		if (stages != null) {
+			builder.append("stages=");
+			builder.append(stages);
+			builder.append(", ");
+		}
+		if (stageOrder != null) {
+			builder.append("stageOrder=");
+			builder.append(stageOrder);
+			builder.append(", ");
+		}
+		if (creationTimestamp != null) {
+			builder.append("creationTimestamp=");
+			builder.append(creationTimestamp);
+			builder.append(", ");
+		}
+		if (lastUpdatedTimestamp != null) {
+			builder.append("lastUpdatedTimestamp=");
+			builder.append(lastUpdatedTimestamp);
+			builder.append(", ");
+		}
+		if (aclEntries != null) {
+			builder.append("aclEntries=");
+			builder.append(aclEntries);
+			builder.append(", ");
+		}
+		if (owner != null) {
+			builder.append("owner=");
+			builder.append(owner);
+			builder.append(", ");
+		}
+		if (pipelineKey != null) {
+			builder.append("pipelineKey=");
+			builder.append(pipelineKey);
+			builder.append(", ");
+		}
+		if (key != null) {
+			builder.append("key=");
+			builder.append(key);
+			builder.append(", ");
+		}
+		if (otherItemsMap != null) {
+			builder.append("otherItemsMap=");
+			builder.append(otherItemsMap);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
 }
