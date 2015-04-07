@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 /**
  * 
  * The Stages object contains the following information:  
@@ -19,9 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author dineshkp
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Stages {
-
 	@JsonIgnore
     private Map<String, Object> otherItemsMap = new HashMap<String, Object>();
     private Map<String, Stage> allStages = new HashMap<String, Stage>();

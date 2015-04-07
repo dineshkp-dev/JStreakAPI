@@ -28,6 +28,20 @@ public class Fields {
     public void setAllFields(String name, Object value) {
         this.allFields.put(name, value);
     }
-    
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Fields [");
+		if (allFields != null) {
+			builder.append("allFields=");
+			builder.append(allFields);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 
 }
