@@ -7,13 +7,28 @@ with my own solution that would help future developers to easily develop applica
 
 From a Java perspective, I have tried to the modules in the project implementation as cohesive as possible, with the lowest possible coupling.
 
-# Libraries Used:
+# 1. Libraries Used:
 <ol>
-<li>Jackson - for JSON parsing/encoding</li>
-<li>Http Components - for Querying/Adding/Deleting/Updating through HTTPS(including authentication)</li>
-<li>Maven - build script to get libraries and build a JAR file</li>
-<li>PowerMock(with JUnit & Mockito) - For Unit Testing</li>
+	<li>Jackson - for JSON parsing/encoding</li>
+	<li>Http Components - for Querying/Adding/Deleting/Updating through HTTPS(including authentication)</li>
+	<li>Maven - build script to get libraries and build a JAR file</li>
+	<li>PowerMock(with JUnit & Mockito) - For Unit Testing</li>
 </ol>
-# Usage
-Currently the final build Jar file is not hosted  on any site, it would be good if you could suggest me a site to host it, so that users can use it easily.
+# 2. Build/Compile the project:
+The 'pom.xml' for Maven is already been setup with the necessary 'maven-assembly-plugin' to create a fat-jar file.
+<ol>
+	<li>Download and install Eclipse from https://eclipse.org/downloads/ , if already installed skip to Step 2. below</li>
+	<li>Within Eclipse, install the 'm2e' plugin for required for Maven projects</li>
+		<ul>
+			<li>Open Eclipse, and navigate to 'Help' -> 'Install new Software...'</li>
+			<li>Enter 'http://download.eclipse.org/technology/m2e/releases'at the 'Work With' Text box</li>
+			<li>Once the below Box is populated, select 'Maven Integration for Eclipse' and click 'Finish' to install m2e-plugin</li>
+		</ul>
+	<li>Set-up the 'Run-Configuration' to 'clean compile package'</li>
+	<li>Use the JAR file found in : {projectDir}/target/jstreak-{version.no}-jar-with-dependencies.jar</li>
+</ol>
+# 3. Usage:
+Note: Currently the final build Jar file is not hosted  on any site, it would be good if you could suggest me a site to host it, so that users can start using it directly.
+Please refer to Step 2. above, on how to build and generate the JAR file (it is really easy!)
+
 (Coming up soon... checkout: https://github.com/dingy007/StreakIntegrationAPI for a Sample implementation!)
