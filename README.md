@@ -21,7 +21,7 @@ The 'pom.xml' for Maven is already been setup with the necessary 'maven-assembly
 	<li>Within Eclipse, install the 'm2e' plugin for required for Maven projects</li>
 		<ul>
 			<li>Open Eclipse, and navigate to 'Help' -> 'Install new Software...'</li>
-			<li>Enter 'http://download.eclipse.org/technology/m2e/releases'at the 'Work With' Text box</li>
+			<li>Enter ' http://download.eclipse.org/technology/m2e/releases ' at the 'Work With' Text box</li>
 			<li>Once the below Box is populated, select 'Maven Integration for Eclipse' and click 'Finish' to install m2e-plugin</li>
 		</ul>
 </ol>
