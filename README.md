@@ -24,11 +24,14 @@ The 'pom.xml' for Maven is already been setup with the necessary 'maven-assembly
 			<li>Enter 'http://download.eclipse.org/technology/m2e/releases'at the 'Work With' Text box</li>
 			<li>Once the below Box is populated, select 'Maven Integration for Eclipse' and click 'Finish' to install m2e-plugin</li>
 		</ul>
+</ol>
+<ol start=3>
 	<li>Set-up the 'Run-Configuration' to 'clean compile package'</li>
 	<li>Use the JAR file found in : {projectDir}/target/jstreak-{version.no}-jar-with-dependencies.jar</li>
 </ol>
 # 3. Usage:
 Note: Currently the final build Jar file is not hosted  on any site, it would be good if you could suggest me a site to host it, so that users can start using it directly.
+You can download the compiled (fat) JAR file from my implementation Project at: https://github.com/dingy007/StreakIntegrationAPI/tree/master/src/main/resources 
 Please refer to Step 2. above, on how to build and generate the JAR file (it is really easy!)
 
 (Coming up soon... checkout: https://github.com/dingy007/StreakIntegrationAPI for a Sample implementation!)
