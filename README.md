@@ -31,7 +31,8 @@ The 'pom.xml' for Maven is already been setup with the necessary 'maven-assembly
 </ol>
 # 3. Usage:
 Note: Currently the final build Jar file is not hosted  on any site, it would be good if you could suggest me a site to host it, so that users can start using it directly.
-You can download the compiled (fat) JAR file from my implementation Project at: https://github.com/dingy007/StreakIntegrationAPI/tree/master/src/main/resources 
+<p><h5>You can download the compiled (fat) JAR file from my implementation Project at: 
+<a href="https://github.com/dingy007/StreakIntegrationAPI/tree/master/src/main/resources" target="_blank">Compiled JAR file for Use!</a> </h5>
 Please refer to Step 2. above, on how to build and generate the JAR file (it is really easy!)
 
-(Coming up soon... checkout: https://github.com/dingy007/StreakIntegrationAPI for a Sample implementation!)
+(Coming up soon... checkout: <a href="https://github.com/dingy007/StreakIntegrationAPI" target="_blank">How to use JStreakAPI</a>for a Sample implementation!)
