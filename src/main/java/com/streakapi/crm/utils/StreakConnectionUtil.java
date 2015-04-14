@@ -34,7 +34,7 @@ public class StreakConnectionUtil {
 	/**
 	 * Creates a HttpClient object.
 	 * <li>MUST be called after initializing CredentialsProvider with User-Key.</li>
-	 * @return
+	 * @return {@link CloseableHttpClient}
 	 */
 	public CloseableHttpClient startHttpClient() {
 		if (credentialsProvider == null) {
@@ -52,6 +52,7 @@ public class StreakConnectionUtil {
 	 * Set up the Credentials to be used for Authenticating the connection, using
 	 * only the 'UserKey' for authentication.
 	 * @param userKey
+	 * @return {@link BasicCredentialsProvider}
 	 */
 	public BasicCredentialsProvider createCredentialsProvider(String userKey) {
 		System.out.println("StreakConnectionUtil.createCredentialsProvider()");
@@ -61,7 +62,8 @@ public class StreakConnectionUtil {
 	}
 	
 	/**
-	 * 
+	 * Creates a TargetHost based on the HostName (www.streak.com), Port number(443) and Scheme (HTTPS)
+	 * @return {@link HttpHost}
 	 */
 	public HttpHost createTargetHost() {
 		System.out.println("StreakConnectionUtil.createTargetHost()");
@@ -69,8 +71,8 @@ public class StreakConnectionUtil {
 	}
 	
 	/**
-	 * @return 
-	 * 
+	 * Creates an Authentication Cache
+	 * @return {@link AuthCache}
 	 */
 	public AuthCache createAuthCache() {
 		System.out.println("StreakConnectionUtil.createAuthCache()");
@@ -99,7 +101,7 @@ public class StreakConnectionUtil {
 	 * <br></br>
 	 * <p>If the conditions are met, boolean 'True' is returned, else 'False'.
 	 * @param response
-	 * @return
+	 * @return boolean
 	 */
 	public static boolean checkHttpResponse(CloseableHttpResponse response) {
 

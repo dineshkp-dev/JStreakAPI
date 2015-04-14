@@ -41,6 +41,10 @@ import com.streakapi.crm.utils.StreakBaseURI;
 import com.streakapi.crm.utils.StreakConnectionUtil;
 import com.streakapi.crm.utils.StreakURIBuilderUtilImpl;
 
+/**
+ * @author dineshkp
+ *
+ */
 public class StreakAPIImpl implements IStreakAPI{
 	@SuppressWarnings("unused")
 	private BasicCredentialsProvider credentialsProvider;
@@ -90,9 +94,6 @@ public class StreakAPIImpl implements IStreakAPI{
 
 	/**
 	 * {@inheritDoc}
-	 * @return
-	 * @throws NoValidObjectsReturned
-	 * @throws IOException
 	 */
 	public User getCurrentUser() throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
@@ -120,6 +121,9 @@ public class StreakAPIImpl implements IStreakAPI{
 		return user;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public User getUser(String userKey) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.getUser()");
 		User user = null;
@@ -147,7 +151,10 @@ public class StreakAPIImpl implements IStreakAPI{
 		}
 		return user;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public List<Pipeline> getAllPipelines() throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.getAllPipelines()");
 		ObjectMapper mapper = new ObjectMapper();
@@ -179,9 +186,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Pipeline getPipeline(String pipelineKey) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
@@ -212,9 +217,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param newPipelineData
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	private Pipeline createPipeline(StringBuilder newPipelineData) throws NoValidObjectsReturned {
 		Pipeline pipeline = null;
@@ -247,10 +250,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineName
-	 * @param pipelineDescription
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Pipeline createPipeline(String pipelineName, String pipelineDescription) throws NoValidObjectsReturned {
 		StringBuilder pipelineData = new StringBuilder();
@@ -265,9 +265,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineName
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Pipeline createPipeline(String pipelineName) throws NoValidObjectsReturned {
 		StringBuilder pipelineData = new StringBuilder();
@@ -281,9 +279,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public boolean deletePipeline(String pipelineKey) throws NoValidObjectsReturned {
 		Boolean success = false;
@@ -316,10 +312,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param pipeline
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Pipeline editPipeline(String pipelineKey, Pipeline pipeline) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
@@ -353,8 +346,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public List<Box> getAllBoxes() throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.getBoxes()");
@@ -420,9 +412,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param boxKey
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Box getBox(String boxKey) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.getBox()");
@@ -454,10 +444,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param newBoxData
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	private Box createBox(String pipelineKey, StringBuilder newBoxData) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
@@ -490,11 +477,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param boxName
-	 * @param stageKey
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Box createBox(String pipelineKey, String boxName, String stageKey) throws NoValidObjectsReturned {
 		StringBuilder newBoxData = new StringBuilder();
@@ -509,10 +492,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param boxName
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Box createBox(String pipelineKey, String boxName) throws NoValidObjectsReturned {
 		StringBuilder newBoxData = new StringBuilder();
@@ -526,9 +506,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param boxKey
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public boolean deleteBox(String boxKey) throws NoValidObjectsReturned {
 		Boolean success = false;
@@ -561,10 +539,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param boxKey
-	 * @param box
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Box editBox(String boxKey, Box box) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.editBox()");
@@ -598,6 +573,9 @@ public class StreakAPIImpl implements IStreakAPI{
 		return box;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Stages getAllStagesInPipeline(String pipelineKey) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.getAllStagesInPipeline()");
 		ObjectMapper mapper = new ObjectMapper();
@@ -628,6 +606,9 @@ public class StreakAPIImpl implements IStreakAPI{
 		return stages;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Stage getStage(String pipelineKey, String stageKey) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.getAllStagesInPipeline()");
 		ObjectMapper mapper = new ObjectMapper();
@@ -657,10 +638,12 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
+	 * Creates a Stage Object in Streak using Stage Data passed as 'StringBuilder' and the pipelineKey.
 	 * @param pipelineKey
-	 * @param newStageData
-	 * @return
+	 * @param newStageData 
+	 * @return Stage
 	 * @throws NoValidObjectsReturned
+	 * @see <a href="https://www.streak.com/api/">https://www.streak.com/api</a>
 	 */
 	private Stage createStage(String pipelineKey, StringBuilder newStageData) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
@@ -693,10 +676,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param stageName
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Stage createStage(String pipelineKey, String stageName) throws NoValidObjectsReturned {
 		StringBuilder newBoxData = new StringBuilder();
@@ -710,10 +690,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param stageKey
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public boolean deleteStage(String pipelineKey, String stageKey) throws NoValidObjectsReturned {
 		Boolean success = false;
@@ -746,11 +723,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param stageKey
-	 * @param stage
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Stage editStage(String pipelineKey,String stageKey, Stage stage) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.editStage()");
@@ -785,9 +758,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public List<Field> getAllFieldsInPipeline(String pipelineKey) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.getFieldsInPipeline()");
@@ -820,10 +791,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param fieldKey
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Field getField(String pipelineKey, String fieldKey) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.getAllStagesInPipeline()");
@@ -853,6 +821,14 @@ public class StreakAPIImpl implements IStreakAPI{
 		return field;
 	}
 
+	/**
+	 * Creates a Field Object in Streak using Field Data passed as 'StringBuilder' and the pipelineKey.
+	 * @param pipelineKey
+	 * @param newFieldData
+	 * @return {@link Field}
+	 * @throws NoValidObjectsReturned
+	 * @see <a href="https://www.streak.com/api/">https://www.streak.com/api</a>
+	 */
 	private Field createField(String pipelineKey, StringBuilder newFieldData) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
 		StringEntity entity = new StringEntity(newFieldData.toString(), contentTypeURLEncoded);
@@ -884,11 +860,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param fieldName
-	 * @param fieldType
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Field createField(String pipelineKey, String fieldName, TYPE fieldType ) throws NoValidObjectsReturned {
 		StringBuilder newFieldData = new StringBuilder();
@@ -903,10 +875,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param fieldKey
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public boolean deleteField(String pipelineKey, String fieldKey) throws NoValidObjectsReturned {
 		Boolean success = false;
@@ -939,11 +908,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param fieldKey
-	 * @param field
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Field editField(String pipelineKey, String fieldKey, Field field) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.editBox()");
@@ -976,7 +941,10 @@ public class StreakAPIImpl implements IStreakAPI{
 		}
 		return field;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public List<BoxField> getAllFieldsInBox(String boxKey) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
 		List<BoxField> boxFields = null;
@@ -1006,6 +974,9 @@ public class StreakAPIImpl implements IStreakAPI{
 		return boxFields;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public BoxField getBoxField(String boxKey, String fieldKey) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
 		BoxField boxField = null;
@@ -1034,6 +1005,9 @@ public class StreakAPIImpl implements IStreakAPI{
 		return boxField;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public BoxField editFieldValue(String boxKey, String fieldKey, BoxField boxField) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.editBox()");
 		ObjectMapper mapper = new ObjectMapper();
@@ -1066,6 +1040,9 @@ public class StreakAPIImpl implements IStreakAPI{
 		return boxField;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public List<Reminder> getAllRemindersForBox(String boxKey) throws NoValidObjectsReturned {
 		System.out.println("StreakAPIImpl.getAllRemindersForBox()");
 		ObjectMapper mapper = new ObjectMapper();
@@ -1096,6 +1073,9 @@ public class StreakAPIImpl implements IStreakAPI{
 		return reminders;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Reminder getReminder(String reminderKey) throws NoValidObjectsReturned {
 		System.out.println("StreakAPIImpl.getReminder()");
 		ObjectMapper mapper = new ObjectMapper();
@@ -1125,6 +1105,14 @@ public class StreakAPIImpl implements IStreakAPI{
 		return reminder;
 	}
 
+	/**
+	 * Creates a Reminder Object in Streak using Reminder Data passed as 'StringBuilder' and the pipelineKey.
+	 * @param pipelineKey
+	 * @param newFieldData
+	 * @return {@link Reminder}
+	 * @throws NoValidObjectsReturned
+	 * @see <a href="https://www.streak.com/api/">https://www.streak.com/api</a>
+	 */
 	private Reminder createReminder(String boxKey, StringBuilder newReminderData) throws NoValidObjectsReturned {
 		ObjectMapper mapper = new ObjectMapper();
 		StringEntity entity = new StringEntity(newReminderData.toString(), contentTypeURLEncoded);
@@ -1156,11 +1144,7 @@ public class StreakAPIImpl implements IStreakAPI{
 	}
 
 	/**
-	 * @param pipelineKey
-	 * @param fieldName
-	 * @param fieldType
-	 * @return
-	 * @throws NoValidObjectsReturned
+	 * {@inheritDoc}
 	 */
 	public Reminder createReminder(String boxKey, String message, Long remindDate, boolean remindFollowers ) throws NoValidObjectsReturned {
 		StringBuilder newReminderData = new StringBuilder();
@@ -1177,6 +1161,9 @@ public class StreakAPIImpl implements IStreakAPI{
 		return createReminder(boxKey, newReminderData);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean deleteReminder(String reminderKey) throws NoValidObjectsReturned {
 		Boolean success = false;
 		ObjectMapper mapper = new ObjectMapper();
@@ -1207,6 +1194,9 @@ public class StreakAPIImpl implements IStreakAPI{
 		return success;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Reminder editReminder(String reminderKey, Reminder reminder) throws NoValidObjectsReturned {
 		System.out.println("StreakAPI.editBox()");
 		ObjectMapper mapper = new ObjectMapper();

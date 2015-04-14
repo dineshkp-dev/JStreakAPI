@@ -25,7 +25,7 @@ public interface IStreakAPI {
 
 	/**
 	 * Gets information about the current User from Streak API.
-	 * @return User
+	 * @return {@link User}
 	 * @see User
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -34,7 +34,7 @@ public interface IStreakAPI {
 
 	/**
 	 * Gets information about a specific User from Streak API, identified through their User-Key.
-	 * @return User
+	 * @return {@link User}
 	 * @see User
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -43,7 +43,7 @@ public interface IStreakAPI {
 
 	/**
 	 * Gets a &lt;List> of all the Pipelines available for the User.
-	 * @return List&lt;Pipeline>
+	 * @return List&lt;{@link Pipeline}>
 	 * @see Pipeline
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -54,7 +54,7 @@ public interface IStreakAPI {
 	/**
 	 * Gets a specific Pipeline within the user's account.
 	 * @param pipelineKey
-	 * @return Pipeline
+	 * @return {@link Pipeline}
 	 * @see Pipeline
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -65,7 +65,7 @@ public interface IStreakAPI {
 	 * Creates a Pipeline and returns a Pipeline Object if successful.
 	 * @param pipelineName
 	 * @param pipelineDescription
-	 * @return Pipeline
+	 * @return {@link Pipeline}
 	 * @see Pipeline
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -75,7 +75,7 @@ public interface IStreakAPI {
 	/**
 	 * Creates a Pipeline, with only the Pipeline Name parameter, and returns a Pipeline Object if successful.
 	 * @param pipelineName
-	 * @return Pipeline
+	 * @return {@link Pipeline}
 	 * @see Pipeline
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -105,7 +105,7 @@ public interface IStreakAPI {
 	
 	/**
 	 * Gets a &lt;List> of all the Boxes available for the User.
-	 * @return List&lt;Box>
+	 * @return List&lt;{@link Box}>
 	 * @see Box
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -115,7 +115,7 @@ public interface IStreakAPI {
 	/**
 	 * Gets a &lt;List> of all the Boxes available for a specific Pipeline.
 	 * @param pipelineKey
-	 * @return List&lt;Box>
+	 * @return List&lt;{@link Box}>
 	 * @see Box
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -125,7 +125,7 @@ public interface IStreakAPI {
 	/**
 	 * Gets a specific Box based on the Box-Key
 	 * @param boxKey
-	 * @return Box
+	 * @return {@link Box}
 	 * @see Box
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -137,7 +137,7 @@ public interface IStreakAPI {
 	 * @param pipelineKey
 	 * @param boxName
 	 * @param stageKey
-	 * @return Box
+	 * @return {@link Box}
 	 * @see Box
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -148,7 +148,7 @@ public interface IStreakAPI {
 	 * Creates a Box in Streak with only a Box Name and the PipelineKey.
 	 * @param pipelineKey
 	 * @param boxName
-	 * @return Box
+	 * @return {@link Box}
 	 * @see Box
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -168,7 +168,7 @@ public interface IStreakAPI {
 	/**
 	 * Edits the information in a Box and returns the edited Box object.
 	 * @param boxKey
-	 * @param Box
+	 * @param box
 	 * @return boolean
 	 * @see Box
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
@@ -179,7 +179,7 @@ public interface IStreakAPI {
 	/**
 	 * Get all the Stages in a Pipeline.
 	 * @param pipelineKey
-	 * @return Stages
+	 * @return {@link Stages}
 	 * @see Stages
 	 * @see Stage
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
@@ -191,7 +191,7 @@ public interface IStreakAPI {
 	 * Get a specific Stage from a Pipeline.
 	 * @param pipelineKey
 	 * @param stageKey
-	 * @return Stage
+	 * @return {@link Stage}
 	 * @see Stage
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -202,7 +202,7 @@ public interface IStreakAPI {
 	 * Creates a new Stage and returns the new Stage values.
 	 * @param pipelineKey
 	 * @param stageName
-	 * @return Stage
+	 * @return {@link Stage}
 	 * @see Stage
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -212,7 +212,7 @@ public interface IStreakAPI {
 	/**
 	 * Deletes an existing Stage and returns 'true' if successful.
 	 * @param pipelineKey
-	 * @param stageName
+	 * @param stageKey
 	 * @return boolean
 	 * @see Stage
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
@@ -224,7 +224,7 @@ public interface IStreakAPI {
 	 * Edits an existing Stage and returns the Stage after editing.
 	 * @param stageKey
 	 * @param stage
-	 * @return Stage
+	 * @return {@link Stage}
 	 * @see Stage
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -234,7 +234,7 @@ public interface IStreakAPI {
 	/**
 	 * Gets a &lt;List> of all the Fields available in a Pipeline.
 	 * @param pipelineKey
-	 * @return Field
+	 * @return {@link Field}
 	 * @see Field
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -245,7 +245,7 @@ public interface IStreakAPI {
 	 * Gets a specific Field available in a Pipeline.
 	 * @param pipelineKey
 	 * @param fieldKey
-	 * @return Field
+	 * @return {@link Field}
 	 * @see Field
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -257,7 +257,7 @@ public interface IStreakAPI {
 	 * @param pipelineKey
 	 * @param fieldName
 	 * @param fieldType
-	 * @return Field
+	 * @return {@link Field}
 	 * @see Field
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -280,7 +280,7 @@ public interface IStreakAPI {
 	 * @param pipelineKey
 	 * @param fieldKey
 	 * @param field
-	 * @return Field
+	 * @return {@link Field}
 	 * @see Field
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -290,7 +290,7 @@ public interface IStreakAPI {
 	/**
 	 * Get a &lt;List> of all the Box's-Fields in a Box.
 	 * @param boxKey
-	 * @return &lt;List>BoxField
+	 * @return &lt;List>{@link BoxField}
 	 * @see BoxField
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -301,7 +301,7 @@ public interface IStreakAPI {
 	 * Get a specific Box's Field Object.
 	 * @param boxKey
 	 * @param fieldKey
-	 * @return BoxField
+	 * @return {@link BoxField}
 	 * @see BoxField
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -312,7 +312,7 @@ public interface IStreakAPI {
 	 * Edit an Existing Box's Field Value.
 	 * @param boxKey
 	 * @param fieldKey
-	 * @return BoxField
+	 * @return {@link BoxField}
 	 * @see BoxField
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -322,7 +322,7 @@ public interface IStreakAPI {
 	/**
 	 * Gets a &lt;List> of all the Reminders available in a specific Box.
 	 * @param boxKey
-	 * @return List&lt;Reminder>
+	 * @return List&lt;{@link Reminder}>
 	 * @see Reminder
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -332,7 +332,7 @@ public interface IStreakAPI {
 	/**
 	 * Gets a specific Reminder from any of the Pipelines.
 	 * @param reminderKey
-	 * @return Reminder
+	 * @return {@link Reminder}
 	 * @see Reminder
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -341,8 +341,11 @@ public interface IStreakAPI {
 	
 	/**
 	 * Gets a specific Reminder from any of the Pipelines.
-	 * @param reminderKey
-	 * @return Reminder
+	 * @param boxKey
+	 * @param message
+	 * @param reminDate
+	 * @param remindFollowers
+	 * @return {@link Reminder}
 	 * @see Reminder
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned
@@ -363,7 +366,7 @@ public interface IStreakAPI {
 	 * Edit an Existing Reminder's Value.
 	 * @param reminderKey
 	 * @param reminder
-	 * @return Reminder
+	 * @return {@link Reminder}
 	 * @see Reminder
 	 * @see <a href="https://www.streak.com/api/">Streak API Doc</a>
 	 * @throws NoValidObjectsReturned

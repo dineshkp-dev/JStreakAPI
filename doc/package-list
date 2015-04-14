@@ -1,0 +1,6 @@
+com.streakapi.crm
+com.streakapi.crm.api
+com.streakapi.crm.datatype
+com.streakapi.crm.exceptions
+com.streakapi.crm.impl
+com.streakapi.crm.utils

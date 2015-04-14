@@ -14,15 +14,16 @@ import java.net.URISyntaxException;
 public interface IStreakURIBuilderUtil {
 	
 	/**
-	 * @return URI: <i>https://www.streak.com/api/v1/users/me</i>
+	 * URI: <i>https://www.streak.com/api/v1/users/me</i>
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/users/me</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api/">https://www.streak.com/api/</a>
 	 */
 	URI getCurrentUserURI() throws URISyntaxException;
 	
 	/**
-	 * Returns the URI: <i>https://www.streak.com/api/v1/users/{userkey}</i>
-	 * @return
+	 * URI: <i>https://www.streak.com/api/v1/users/{userkey}</i>
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/users/{userkey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -30,7 +31,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -38,7 +39,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -46,7 +47,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -54,7 +55,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -62,7 +63,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -70,7 +71,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/boxes</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/boxes</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -78,7 +79,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/boxes"</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/boxes"</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -86,7 +87,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/boxes/{boxKey}"</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/boxes/{boxKey}"</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -94,7 +95,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/boxes</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/boxes</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -102,7 +103,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/boxes/{boxKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/boxes/{boxKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -110,7 +111,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/boxes/{boxKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/boxes/{boxKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -118,7 +119,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/stages</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/stages</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -126,7 +127,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/stages/{stageKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/stages/{stageKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -134,7 +135,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/stages</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/stages</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -142,7 +143,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/stages/{stageKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/stages/{stageKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -150,7 +151,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/stages/{stageKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/stages/{stageKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -158,7 +159,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/fields</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/fields</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -166,7 +167,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/fields/{fieldsKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/fields/{fieldsKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -174,7 +175,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/fields</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/fields</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -182,7 +183,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/fields/{fieldsKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/fields/{fieldsKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -190,7 +191,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/fields/{fieldsKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/pipelines/{pipelineKey}/fields/{fieldsKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -198,7 +199,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/boxes/{boxKey}/fields</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/boxes/{boxKey}/fields</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -206,7 +207,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/boxes/{boxKey}/fields/{fieldKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/boxes/{boxKey}/fields/{fieldKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -214,7 +215,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/boxes/{boxKey}/fields/{fieldKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/boxes/{boxKey}/fields/{fieldKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -222,7 +223,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/boxes/{boxKey}/reminders</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/boxes/{boxKey}/reminders</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -230,7 +231,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/reminders/{reminderKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/reminders/{reminderKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -238,7 +239,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/boxes/{boxKey}/reminders</i>
-	 * @return
+	 * @return URI: <i>https://www.streak.com/api/v1/boxes/{boxKey}/reminders</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -246,7 +247,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/reminders/{reminderKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/reminders/{reminderKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
@@ -254,7 +255,7 @@ public interface IStreakURIBuilderUtil {
 	
 	/**
 	 * Returns the URI: <i>https://www.streak.com/api/v1/reminders/{reminderKey}</i>
-	 * @return
+	 * @return {@link URI}: <i>https://www.streak.com/api/v1/reminders/{reminderKey}</i>
 	 * @throws URISyntaxException
 	 * @see <a href="https://www.streak.com/api">https://www.streak.com/api/v1</a>
 	 */
