@@ -35,3 +35,5 @@ Note: Currently the final build Jar file is not hosted  on any site, it would be
 <a href="https://github.com/dingy007/StreakIntegrationAPI/tree/master/src/main/resources" target="_blank">Compiled JAR file for Use!</a> </h5>
 Please refer to Step 2. above, on how to build and generate the JAR file if you would like to generate it yourself.(It is really easy!)
 <h5>(Coming up soon... checkout: <a href="https://github.com/dingy007/StreakIntegrationAPI" target="_blank">How to use JStreakAPI</a> for a Sample implementation!)</h5>
+
+<h5>To be continued...</h5>
