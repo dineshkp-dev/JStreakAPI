@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class Field {
 
-	public enum TYPE {TEXT_INPUT, DATE, PERSON, DROPDOWN};
+	public enum TYPE {TEXT_INPUT, DATE, PERSON, DROPDOWN, TAG, CHECKBOX, FORMULA};
 	
     private String name;
     private String key;
